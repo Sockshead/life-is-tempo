@@ -37,6 +37,7 @@ jobs:
       - name: Build static site
         run: pnpm build
         env:
+          NEXT_PUBLIC_BASE_PATH: /life-is-tempo
           SKIP_ENV_VALIDATION: true  # Skip optional env vars during build
 
       - name: Create root index redirect
@@ -62,4 +63,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
           publish_branch: gh-pages
+          keep_files: true  # Preserve staging and test subdirectories
+          # No destination_dir - deploys to root
           cname: false  # Set custom domain if needed
