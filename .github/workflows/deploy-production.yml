@@ -1,8 +1,8 @@
-name: Deploy to GitHub Pages
+name: Deploy to Production
 
 on:
   push:
-    branches: [master]
+    branches: [develop]
   workflow_dispatch:  # Allow manual deployment
 
 permissions:
@@ -13,6 +13,9 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://sockshead.github.io/life-is-tempo
 
     steps:
       - name: Checkout code
@@ -34,6 +37,7 @@ jobs:
       - name: Build static site
         run: pnpm build
         env:
+          NEXT_PUBLIC_BASE_PATH: /life-is-tempo
           SKIP_ENV_VALIDATION: true  # Skip optional env vars during build
 
       - name: Create root index redirect
@@ -59,4 +63,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
           publish_branch: gh-pages
+          # No destination_dir - deploys to root
           cname: false  # Set custom domain if needed

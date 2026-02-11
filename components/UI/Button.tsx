@@ -67,7 +67,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
         <Link
           href={href}
           className={combinedClassName}
-          ref={ref as any}
+          ref={ref as React.Ref<HTMLAnchorElement>}
           {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}
         >
           {loading && <LoadingSpinner size={size} />}
@@ -79,7 +79,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
     // Render as button
     return (
       <button
-        ref={ref as any}
+        ref={ref as React.Ref<HTMLButtonElement>}
         className={combinedClassName}
         disabled={isDisabled}
         aria-busy={loading}
