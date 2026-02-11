@@ -1,8 +1,28 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ls:*)",
-      "Bash(git pull:*)"
+      "Bash(git worktree:*)",
+      "Bash(pnpm install:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(timeout 15 pnpm dev:*)",
+      "Bash(find:*)",
+      "Bash(pkill:*)",
+      "Bash(pnpm dev:*)",
+      "Bash(curl:*)",
+      "Bash(pnpm type-check:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(git pull:*)",
+      "Bash(cat:*)",
+      "Bash(gh run list:*)",
+      "Bash(git branch:*)",
+      "Bash(git merge:*)",
+      "Bash(gh run watch:*)",
+      "Bash(pnpm lint:*)"
     ]
   }
 }

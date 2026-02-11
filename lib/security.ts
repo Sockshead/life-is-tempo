@@ -1,8 +1,10 @@
-import { headers } from "next/headers";
+// import { headers } from "next/headers"; // Not available in static export
 
 /**
  * Security utilities for input validation, rate limiting, and protection
  * against common web vulnerabilities
+ *
+ * Note: Server-side features (getClientIp) are disabled for static export
  */
 
 /**
@@ -106,23 +108,28 @@ export const rateLimiter = new RateLimiter();
 /**
  * Get client IP address from request headers
  * Handles various proxy headers
+ *
+ * Note: This function is disabled for static export.
+ * Use only if migrating to a server-side hosting solution.
  */
 export async function getClientIp(): Promise<string> {
-  const headersList = await headers();
+  // const headersList = await headers();
 
-  // Check common proxy headers
-  const forwarded = headersList.get("x-forwarded-for");
-  if (forwarded) {
-    return forwarded.split(",")[0].trim();
-  }
+  // // Check common proxy headers
+  // const forwarded = headersList.get("x-forwarded-for");
+  // if (forwarded) {
+  //   return forwarded.split(",")[0].trim();
+  // }
 
-  const realIp = headersList.get("x-real-ip");
-  if (realIp) {
-    return realIp;
-  }
+  // const realIp = headersList.get("x-real-ip");
+  // if (realIp) {
+  //   return realIp;
+  // }
 
-  // Fallback to remote address
-  return headersList.get("x-vercel-forwarded-for") || "unknown";
+  // // Fallback to remote address
+  // return headersList.get("x-vercel-forwarded-for") || "unknown";
+
+  return "static-export"; // Placeholder for static export
 }
 
 /**

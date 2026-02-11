@@ -4,8 +4,10 @@
 
 set -e  # Exit on error
 
-REPO="juancmandev/life-is-tempo"
-BRANCH_MAIN="master"  # Using 'master' as detected by git
+# Auto-detect repository from git remote
+REPO_URL=$(git remote get-url origin)
+REPO=$(echo "$REPO_URL" | sed -E 's/.*[:/]([^/]+\/[^/.]+)(\.git)?$/\1/')
+BRANCH_MAIN=$(git branch --show-current)
 BRANCH_DEVELOP="develop"
 
 echo "🔒 Setting up GitHub Security for $REPO"
@@ -28,7 +30,8 @@ echo ""
 echo "📊 Enabling repository security features..."
 
 # Enable vulnerability alerts
-gh api -X PATCH "/repos/$REPO" \
+# Note: Using 'repos/' prefix to avoid Git Bash path rewriting
+gh api -X PATCH "repos/$REPO" \
     -f security_and_analysis[advanced_security][status]=enabled \
     -f security_and_analysis[secret_scanning][status]=enabled \
     -f security_and_analysis[secret_scanning_push_protection][status]=enabled \
@@ -43,19 +46,11 @@ echo ""
 
 echo "🛡️  Setting up branch protection for $BRANCH_MAIN..."
 
-gh api -X PUT "/repos/$REPO/branches/$BRANCH_MAIN/protection" \
-    -f required_status_checks[strict]=true \
-    -f required_status_checks[contexts][]=[] \
-    -f enforce_admins=true \
-    -f required_pull_request_reviews[dismiss_stale_reviews]=true \
-    -f required_pull_request_reviews[require_code_owner_reviews]=false \
-    -f required_pull_request_reviews[required_approving_review_count]=1 \
-    -f required_pull_request_reviews[require_last_push_approval]=false \
-    -f restrictions=null \
-    -f required_conversation_resolution=true \
-    -f allow_force_pushes=false \
-    -f allow_deletions=false \
-    2>/dev/null && echo "✅ Branch protection enabled for $BRANCH_MAIN" || echo "⚠️  Branch protection failed (branch may not exist yet or insufficient permissions)"
+# Use JSON file for branch protection (required by gh CLI)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+gh api -X PUT "repos/$REPO/branches/$BRANCH_MAIN/protection" \
+    --input "$SCRIPT_DIR/branch-protection.json" \
+    > /dev/null 2>&1 && echo "✅ Branch protection enabled for $BRANCH_MAIN" || echo "⚠️  Branch protection failed (branch may not exist yet or insufficient permissions)"
 
 echo ""
 
@@ -64,22 +59,12 @@ echo ""
 # ============================================================================
 
 if git show-ref --verify --quiet "refs/heads/$BRANCH_DEVELOP" 2>/dev/null || \
-   gh api "/repos/$REPO/branches/$BRANCH_DEVELOP" >/dev/null 2>&1; then
+   gh api "repos/$REPO/branches/$BRANCH_DEVELOP" >/dev/null 2>&1; then
     echo "🛡️  Setting up branch protection for $BRANCH_DEVELOP..."
 
-    gh api -X PUT "/repos/$REPO/branches/$BRANCH_DEVELOP/protection" \
-        -f required_status_checks[strict]=true \
-        -f required_status_checks[contexts][]=[] \
-        -f enforce_admins=true \
-        -f required_pull_request_reviews[dismiss_stale_reviews]=true \
-        -f required_pull_request_reviews[require_code_owner_reviews]=false \
-        -f required_pull_request_reviews[required_approving_review_count]=1 \
-        -f required_pull_request_reviews[require_last_push_approval]=false \
-        -f restrictions=null \
-        -f required_conversation_resolution=true \
-        -f allow_force_pushes=false \
-        -f allow_deletions=false \
-        2>/dev/null && echo "✅ Branch protection enabled for $BRANCH_DEVELOP" || echo "⚠️  Branch protection failed"
+    gh api -X PUT "repos/$REPO/branches/$BRANCH_DEVELOP/protection" \
+        --input "$SCRIPT_DIR/branch-protection.json" \
+        > /dev/null 2>&1 && echo "✅ Branch protection enabled for $BRANCH_DEVELOP" || echo "⚠️  Branch protection failed"
 else
     echo "ℹ️  No $BRANCH_DEVELOP branch detected, skipping"
 fi
@@ -92,10 +77,10 @@ echo ""
 
 echo "🤖 Enabling Dependabot..."
 
-gh api -X PUT "/repos/$REPO/vulnerability-alerts" \
+gh api -X PUT "repos/$REPO/vulnerability-alerts" \
     2>/dev/null && echo "✅ Dependabot alerts enabled" || echo "⚠️  Dependabot alerts may already be enabled"
 
-gh api -X PUT "/repos/$REPO/automated-security-fixes" \
+gh api -X PUT "repos/$REPO/automated-security-fixes" \
     2>/dev/null && echo "✅ Dependabot security updates enabled" || echo "⚠️  Security updates may already be enabled"
 
 echo ""
@@ -106,7 +91,7 @@ echo ""
 
 echo "⚙️  Configuring repository settings..."
 
-gh api -X PATCH "/repos/$REPO" \
+gh api -X PATCH "repos/$REPO" \
     -f has_issues=true \
     -f has_wiki=false \
     -f has_projects=false \
@@ -125,7 +110,7 @@ echo ""
 
 echo "🔐 Enabling private vulnerability reporting..."
 
-gh api -X PUT "/repos/$REPO/private-vulnerability-reporting" \
+gh api -X PUT "repos/$REPO/private-vulnerability-reporting" \
     2>/dev/null && echo "✅ Private vulnerability reporting enabled" || echo "⚠️  Feature may not be available or already enabled"
 
 echo ""
@@ -150,6 +135,6 @@ echo "  gh secret set NEWSLETTER_API_KEY"
 echo "  gh secret set RATE_LIMIT_SECRET"
 echo ""
 echo "📊 View security status:"
-echo "  gh api /repos/$REPO/vulnerability-alerts"
-echo "  gh api /repos/$REPO/branches/$BRANCH_MAIN/protection"
+echo "  gh api repos/$REPO/vulnerability-alerts"
+echo "  gh api repos/$REPO/branches/$BRANCH_MAIN/protection"
 echo ""

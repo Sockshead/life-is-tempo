@@ -63,16 +63,19 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+const getBasePath = () => {
+  if (process.env.NEXT_PUBLIC_BASE_PATH) {
+    return process.env.NEXT_PUBLIC_BASE_PATH;
+  }
+  return "/life-is-tempo"; // Default to production
+};
+
 const nextConfig: NextConfig = {
+  output: "export", // Enable static HTML export for GitHub Pages
+  basePath: getBasePath(), // Dynamic basePath based on environment
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: securityHeaders,
-      },
-    ];
-  },
+  // Note: headers() is not supported with static export
+  // Security headers should be configured at the hosting level (e.g., GitHub Pages custom domain)
 };
 
 const withMDX = createMDX({
