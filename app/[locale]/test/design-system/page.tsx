@@ -53,7 +53,7 @@ export default function DesignSystemTest() {
         <div className="grid grid-cols-2 gap-6">
           <div className="p-6 border border-gray-800 rounded-lg">
             <p className="font-mono text-sm mb-4">Glitch Reveal (on hover)</p>
-            <div className="h-24 bg-brand-purple rounded hover:animate-glitch flex items-center justify-center">
+            <div className="h-24 bg-brand-purple rounded hover:animate-[glitchReveal_0.5s_ease-out] flex items-center justify-center">
               <span className="font-display text-2xl">HOVER ME</span>
             </div>
           </div>

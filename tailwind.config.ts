@@ -31,7 +31,6 @@ const config: Config = {
       },
       animation: {
         scanline: 'scanline 8s linear infinite',
-        glitch: 'glitchReveal 0.5s ease-out',
         shine: 'shine 3s linear infinite',
         pulse: 'pulse 2s ease-in-out infinite',
         'gradient-rotate': 'gradientRotate 10s linear infinite',
