@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  /* Life Is Tempo Brand Colors */
+  --color-brand-purple: #8B5CF6;
+  --color-brand-blue: #3B82F6;
+  --color-brand-cyan: #06B6D4;
+  --color-brand-dark: #0a0a0a;
+
+  /* Override Tailwind defaults */
+  --color-purple-500: #8B5CF6;
+  --color-blue-500: #3B82F6;
+  --color-cyan-400: #06B6D4;
+  --color-cyan-500: #06B6D4;
+
+  /* Fonts */
+  --font-bebas: var(--font-bebas);
+  --font-mono: var(--font-mono);
+}
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #E5E5E5;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  cursor: default;
+}
+
+/* Scanline effect (subtle) */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--purple);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan);
+}
+
+/* Animations */
+@keyframes glitchReveal {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  20% {
+    opacity: 0.8;
+    transform: translateX(20px);
+  }
+  40% {
+    opacity: 1;
+    transform: translateX(-10px);
+  }
+  60% {
+    opacity: 0.9;
+    transform: translateX(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

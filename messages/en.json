@@ -1,0 +1,34 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "posts": "Posts",
+    "training": "Training Chronicles",
+    "tactics": "Dual Life Tactics",
+    "underground": "Underground Endurance"
+  },
+  "hero": {
+    "bpm": "BPM",
+    "tagline": "Where Training Meets Techno",
+    "subtitle": "Personal chronicle of training for Berlin 70.3 from Colombia while living the techno scene. Real training, real parties, real talk about balancing both worlds.",
+    "cta": "Follow the Journey",
+    "raceDistance": "Race Distance",
+    "daysToBerlin": "Days to Berlin",
+    "altitude": "Altitude (m)"
+  },
+  "newsletter": {
+    "title": "Join The Journey",
+    "subtitle": "214 days to Berlin. Weekly updates from Colombia to the finish line (and hopefully Berghain). Real training, real parties, real talk.",
+    "placeholder": "your@email.com",
+    "submit": "Subscribe",
+    "success": "Thanks for subscribing!",
+    "error": "Something went wrong. Please try again."
+  },
+  "footer": {
+    "tagline": "Life Is Tempo",
+    "about": "Training for Berlin 70.3 from Colombia. Documenting the journey where endurance training meets underground techno culture.",
+    "follow": "Follow",
+    "subscribe": "Subscribe",
+    "copyright": "All rights reserved."
+  }
+}

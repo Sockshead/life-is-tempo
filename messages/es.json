@@ -1,0 +1,34 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "about": "Acerca",
+    "posts": "Publicaciones",
+    "training": "Crónicas de Entrenamiento",
+    "tactics": "Tácticas de Vida Dual",
+    "underground": "Resistencia Underground"
+  },
+  "hero": {
+    "bpm": "BPM",
+    "tagline": "Donde el Entrenamiento Encuentra el Techno",
+    "subtitle": "Crónica personal del entrenamiento para el Ironman 70.3 de Berlín desde Colombia mientras vivo la escena techno. Entrenamiento real, fiestas reales, charlas reales sobre balancear ambos mundos.",
+    "cta": "Seguir el Viaje",
+    "raceDistance": "Distancia de Carrera",
+    "daysToBerlin": "Días a Berlín",
+    "altitude": "Altitud (m)"
+  },
+  "newsletter": {
+    "title": "Únete al Viaje",
+    "subtitle": "214 días para Berlín. Actualizaciones semanales desde Colombia hasta la línea de meta (y esperemos que Berghain). Entrenamiento real, fiestas reales, charla real.",
+    "placeholder": "tu@email.com",
+    "submit": "Suscribirse",
+    "success": "¡Gracias por suscribirte!",
+    "error": "Algo salió mal. Por favor intenta de nuevo."
+  },
+  "footer": {
+    "tagline": "Life Is Tempo",
+    "about": "Entrenando para el Ironman 70.3 de Berlín desde Colombia. Documentando el viaje donde el entrenamiento de resistencia se encuentra con la cultura techno underground.",
+    "follow": "Seguir",
+    "subscribe": "Suscribirse",
+    "copyright": "Todos los derechos reservados."
+  }
+}
