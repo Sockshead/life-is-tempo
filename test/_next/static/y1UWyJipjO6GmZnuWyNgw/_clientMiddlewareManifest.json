@@ -1,0 +1,10 @@
+[
+  {
+    "regexp": "^\\/life-is-tempo\\/test(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/(\\/?index|\\/?index\\.json))?[\\/#\\?]?$",
+    "originalSource": "/"
+  },
+  {
+    "regexp": "^\\/life-is-tempo\\/test(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/(en|es))(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\.json)?[\\/#\\?]?$",
+    "originalSource": "/(en|es)/:path*"
+  }
+]
