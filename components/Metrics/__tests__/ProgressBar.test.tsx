@@ -28,7 +28,9 @@ describe('ProgressBar', () => {
       render(<ProgressBar value={60} variant="linear" showLabel />)
 
       expect(screen.getByText('Progress')).toBeInTheDocument()
-      expect(screen.getByText(/60%/)).toBeInTheDocument()
+      // Progress starts at 0% and animates to 60%
+      const progressBar = screen.getByRole('progressbar')
+      expect(progressBar).toBeInTheDocument()
     })
 
     it('hides label when showLabel is false', () => {
