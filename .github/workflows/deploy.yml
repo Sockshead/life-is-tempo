@@ -36,6 +36,23 @@ jobs:
         env:
           SKIP_ENV_VALIDATION: true  # Skip optional env vars during build
 
+      - name: Create root index redirect
+        run: |
+          cat > out/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta http-equiv="refresh" content="0;url=/life-is-tempo/en.html">
+            <link rel="canonical" href="/life-is-tempo/en.html">
+            <title>Life Is Tempo - Redirecting...</title>
+          </head>
+          <body>
+            <p>Redirecting to <a href="/life-is-tempo/en.html">Life Is Tempo</a>...</p>
+          </body>
+          </html>
+          EOF
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
