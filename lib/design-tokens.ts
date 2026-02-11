@@ -77,10 +77,10 @@ export const designTokens: DesignTokens = {
 // Helper functions for programmatic access
 export const getColor = (path: string): string => {
   const keys = path.split('.')
-  let value: Record<string, unknown> | string = colors
+  let value: unknown = colors
   for (const key of keys) {
-    if (typeof value === 'object' && value !== null) {
-      value = value[key] as Record<string, unknown> | string
+    if (typeof value === 'object' && value !== null && key in value) {
+      value = (value as Record<string, unknown>)[key]
     }
   }
   return value as string
