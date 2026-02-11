@@ -155,4 +155,4 @@ This project is open source and available under the [MIT License](./LICENSE).
 
 ---
 
-Built with ❤️ by Juan Carlos Martínez
+Built with ❤️ by Ultra Choko
