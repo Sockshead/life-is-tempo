@@ -1,18 +1,19 @@
 name: Deploy to Staging
 
 on:
-  push:
+  pull_request:
     branches: [develop]
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     environment:
       name: staging
+      url: https://sockshead.github.io/life-is-tempo/staging
 
     steps:
       - name: Checkout code
@@ -40,11 +41,13 @@ jobs:
       - name: Build static site
         run: pnpm build
         env:
+          NEXT_PUBLIC_BASE_PATH: /life-is-tempo/staging
           SKIP_ENV_VALIDATION: true
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+      - name: Deploy to GitHub Pages (Staging)
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: staging-build
-          path: out/
-          retention-days: 7
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          publish_branch: gh-pages
+          destination_dir: staging

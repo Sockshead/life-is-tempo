@@ -6,13 +6,14 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     environment:
       name: test
+      url: https://sockshead.github.io/life-is-tempo/test
 
     steps:
       - name: Checkout code
@@ -40,11 +41,13 @@ jobs:
       - name: Build static site
         run: pnpm build
         env:
+          NEXT_PUBLIC_BASE_PATH: /life-is-tempo/test
           SKIP_ENV_VALIDATION: true
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+      - name: Deploy to GitHub Pages (Test)
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: test-build
-          path: out/
-          retention-days: 3
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          publish_branch: gh-pages
+          destination_dir: test
