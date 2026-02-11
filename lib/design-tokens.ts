@@ -77,11 +77,13 @@ export const designTokens: DesignTokens = {
 // Helper functions for programmatic access
 export const getColor = (path: string): string => {
   const keys = path.split('.')
-  let value: any = colors
+  let value: unknown = colors
   for (const key of keys) {
-    value = value[key]
+    if (typeof value === 'object' && value !== null && key in value) {
+      value = (value as Record<string, unknown>)[key]
+    }
   }
-  return value
+  return value as string
 }
 
 export const getSpacing = (size: keyof typeof spacing): string => {

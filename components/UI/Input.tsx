@@ -1,4 +1,4 @@
-import { forwardRef, InputHTMLAttributes, TextareaHTMLAttributes } from 'react'
+import { forwardRef, InputHTMLAttributes, TextareaHTMLAttributes, useId } from 'react'
 
 type InputType = 'text' | 'email' | 'password' | 'textarea'
 
@@ -40,7 +40,8 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
     },
     ref
   ) => {
-    const id = props.id || `input-${Math.random().toString(36).substr(2, 9)}`
+    const generatedId = useId()
+    const id = props.id || `input-${generatedId}`
 
     const baseStyles =
       'w-full px-4 py-3 font-mono text-base bg-gray-900 border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-950 disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-gray-600'
@@ -70,7 +71,7 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
 
         {type === 'textarea' ? (
           <textarea
-            ref={ref as any}
+            ref={ref as React.Ref<HTMLTextAreaElement>}
             id={id}
             className={`${combinedClassName} min-h-[120px] resize-y`}
             aria-invalid={!!error}
@@ -83,7 +84,7 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
           />
         ) : (
           <input
-            ref={ref as any}
+            ref={ref as React.Ref<HTMLInputElement>}
             type={type}
             id={id}
             className={combinedClassName}
