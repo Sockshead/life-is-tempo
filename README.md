@@ -90,7 +90,8 @@ Comprehensive documentation available in [`/docs`](./docs):
 - **[Architecture Diagrams](./docs/architecture/diagrams.md)** - Mermaid diagrams (routing, security, deployment)
 
 ### Deployment
-- **[Vercel Deployment Guide](./docs/deployment/vercel-deployment.md)** - Step-by-step deployment process
+- **[GitHub Pages Deployment](./docs/deployment/github-pages-deployment.md)** - Multi-environment deployment strategy
+- **[Vercel Deployment Guide](./docs/deployment/vercel-deployment.md)** - Alternative deployment process
 - **[Environment Variables](./docs/deployment/environment-variables.md)** - Complete variable reference
 
 ### Development
