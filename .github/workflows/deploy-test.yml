@@ -51,3 +51,4 @@ jobs:
           publish_dir: ./out
           publish_branch: gh-pages
           destination_dir: test
+          keep_files: true  # Preserve production and staging deployments
