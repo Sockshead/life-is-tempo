@@ -41,32 +41,6 @@ const config: Config = {
           '0%': { transform: 'translateY(-100%)' },
           '100%': { transform: 'translateY(100vh)' },
         },
-        glitchReveal: {
-          '0%': {
-            clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
-            transform: 'translate(0)',
-          },
-          '20%': {
-            clipPath: 'polygon(0 15%, 100% 15%, 100% 15%, 0 15%)',
-            transform: 'translate(-2px)',
-          },
-          '40%': {
-            clipPath: 'polygon(0 10%, 100% 10%, 100% 20%, 0 20%)',
-            transform: 'translate(2px)',
-          },
-          '60%': {
-            clipPath: 'polygon(0 50%, 100% 50%, 100% 60%, 0 60%)',
-            transform: 'translate(-1px)',
-          },
-          '80%': {
-            clipPath: 'polygon(0 70%, 100% 70%, 100% 80%, 0 80%)',
-            transform: 'translate(1px)',
-          },
-          '100%': {
-            clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-            transform: 'translate(0)',
-          },
-        },
         shine: {
           '0%': { backgroundPosition: '200% center' },
           '100%': { backgroundPosition: '-200% center' },
