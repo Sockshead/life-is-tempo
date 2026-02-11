@@ -64,15 +64,10 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const nextConfig: NextConfig = {
+  output: "export", // Enable static HTML export for GitHub Pages
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: securityHeaders,
-      },
-    ];
-  },
+  // Note: headers() is not supported with static export
+  // Security headers should be configured at the hosting level (e.g., GitHub Pages custom domain)
 };
 
 const withMDX = createMDX({

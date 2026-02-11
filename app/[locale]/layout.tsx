@@ -1,6 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Bebas_Neue, JetBrains_Mono } from 'next/font/google';
+import { routing } from '@/i18n/routing';
 import '../globals.css';
 
 const bebasNeue = Bebas_Neue({
@@ -24,6 +25,11 @@ export const metadata = {
     type: 'website',
   },
 };
+
+// Generate static params for all supported locales
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export default async function LocaleLayout({
   children,
