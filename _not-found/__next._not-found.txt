@@ -1,4 +1,4 @@
 1:"$Sreact.fragment"
 2:I[3097,["/life-is-tempo/_next/static/chunks/33074d3ff5d0cd2d.js","/life-is-tempo/_next/static/chunks/c4d90098b4abc498.js"],"default"]
 3:I[99299,["/life-is-tempo/_next/static/chunks/33074d3ff5d0cd2d.js","/life-is-tempo/_next/static/chunks/c4d90098b4abc498.js"],"default"]
-0:{"buildId":"697KtpdiSqZUkzX6u-mye","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"5VMe1EBLO4UU_PK-G4Hul","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
