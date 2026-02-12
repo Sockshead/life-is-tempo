@@ -7,6 +7,11 @@
     "tactics": "Tácticas de Vida Dual",
     "underground": "Resistencia Underground"
   },
+  "nav": {
+    "training": "CRONICAS DE ENTRENAMIENTO",
+    "dualLife": "TACTICAS DE VIDA DUAL",
+    "underground": "RESISTENCIA UNDERGROUND"
+  },
   "hero": {
     "bpm": "BPM",
     "tagline": "Donde el Entrenamiento Encuentra el Techno",
@@ -29,6 +34,18 @@
     "about": "Entrenando para el Ironman 70.3 de Berlín desde Colombia. Documentando el viaje donde el entrenamiento de resistencia se encuentra con la cultura techno underground.",
     "follow": "Seguir",
     "subscribe": "Suscribirse",
-    "copyright": "Todos los derechos reservados."
+    "copyright": "Todos los derechos reservados.",
+    "location": "Bogota, Colombia",
+    "train": "Entrenar",
+    "live": "Vivir",
+    "connect": "Conectar",
+    "trainingChronicles": "Cronicas de Entrenamiento",
+    "berlin703": "Berlin 70.3",
+    "dualLifeTactics": "Tacticas de Vida Dual",
+    "undergroundEndurance": "Resistencia Underground",
+    "instagram": "Instagram",
+    "strava": "Strava",
+    "spotify": "Spotify",
+    "email": "Email"
   }
 }

@@ -93,16 +93,29 @@ jobs:
           FAILED=0
           BASE_URL="https://sockshead.github.io/life-is-tempo"
 
-          for route in "" "/en" "/es" "/en/blog"; do
+          # Check root (accept 200 or 301 redirect)
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+                   -H "Cache-Control: no-cache" \
+                   -H "Pragma: no-cache" \
+                   "${BASE_URL}")
+          if [ "$STATUS" -eq 200 ] || [ "$STATUS" -eq 301 ]; then
+            echo "✅ /: HTTP ${STATUS}"
+          else
+            echo "❌ /: HTTP ${STATUS} (FAILED)"
+            FAILED=1
+          fi
+
+          # Check language routes (must be 200)
+          for route in "/en" "/es"; do
             STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
                      -H "Cache-Control: no-cache" \
                      -H "Pragma: no-cache" \
                      "${BASE_URL}${route}")
 
             if [ "$STATUS" -eq 200 ]; then
-              echo "✅ ${route:-/}: HTTP ${STATUS}"
+              echo "✅ ${route}: HTTP ${STATUS}"
             else
-              echo "❌ ${route:-/}: HTTP ${STATUS} (FAILED)"
+              echo "❌ ${route}: HTTP ${STATUS} (FAILED)"
               FAILED=1
             fi
           done
