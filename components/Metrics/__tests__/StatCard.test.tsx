@@ -8,7 +8,7 @@ mockIntersectionObserver.mockReturnValue({
   unobserve: () => null,
   disconnect: () => null,
 })
-window.IntersectionObserver = mockIntersectionObserver as any
+window.IntersectionObserver = mockIntersectionObserver as unknown as typeof IntersectionObserver
 
 describe('StatCard', () => {
   const mockMetrics = [

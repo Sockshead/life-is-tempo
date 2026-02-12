@@ -97,7 +97,7 @@ export function useCountUp(
         setCount(end)
         clearInterval(timer)
       } else {
-        setCount(prev => {
+        setCount(() => {
           const nextValue = increment * currentStep
           return Number(nextValue.toFixed(decimals))
         })

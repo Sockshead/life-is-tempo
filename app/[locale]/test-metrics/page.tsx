@@ -200,7 +200,7 @@ export default function TestMetricsPage() {
         <section className="mt-16 p-6 border border-brand-cyan/30 rounded-lg">
           <h3 className="font-display text-2xl text-brand-cyan mb-2">Accessibility Testing</h3>
           <ul className="font-mono text-sm text-gray-400 space-y-2">
-            <li>✓ Screen readers: Counter values announced with aria-live="polite"</li>
+            <li>✓ Screen readers: Counter values announced with aria-live=&quot;polite&quot;</li>
             <li>✓ Reduced motion: Disable animations via browser settings</li>
             <li>✓ Color zones: Include text labels (not color-only)</li>
             <li>✓ Progress bars: Proper ARIA attributes (role, valuenow, valuemin, valuemax)</li>

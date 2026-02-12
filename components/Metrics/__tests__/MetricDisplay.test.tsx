@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { MetricDisplay } from '../MetricDisplay'
 
 // Mock Intersection Observer
@@ -8,7 +8,7 @@ mockIntersectionObserver.mockReturnValue({
   unobserve: () => null,
   disconnect: () => null,
 })
-window.IntersectionObserver = mockIntersectionObserver as any
+window.IntersectionObserver = mockIntersectionObserver as unknown as typeof IntersectionObserver
 
 describe('MetricDisplay', () => {
   beforeEach(() => {
@@ -58,7 +58,7 @@ describe('MetricDisplay', () => {
     })
 
     it('renders pulse variant with animation class', () => {
-      const { container } = render(
+      render(
         <MetricDisplay value={165} label="PULSE" variant="pulse" />
       )
 
