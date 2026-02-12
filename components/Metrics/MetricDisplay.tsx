@@ -67,6 +67,13 @@ const colorClasses: Record<MetricColor, string> = {
   white: 'text-white',
 }
 
+const gradientClasses: Record<MetricColor, string> = {
+  purple: 'bg-gradient-to-r from-brand-purple to-brand-purple/50',
+  blue: 'bg-gradient-to-r from-brand-blue to-brand-blue/50',
+  cyan: 'bg-gradient-to-r from-brand-cyan to-brand-cyan/50',
+  white: 'bg-gradient-to-r from-white to-white/50',
+}
+
 /**
  * Versatile metric display component with multiple visualization variants
  *
@@ -157,7 +164,7 @@ export function MetricDisplay({
             <div
               className={cn(
                 'h-full rounded-full transition-all duration-1000 ease-out',
-                `bg-gradient-to-r from-brand-${color} to-brand-${color}/50`
+                gradientClasses[color]
               )}
               style={{ width: `${percentage}%` }}
               role="progressbar"
