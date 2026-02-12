@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+  deployments: write
 
 jobs:
   build-and-test:
@@ -36,7 +38,11 @@ jobs:
         run: pnpm lint
 
       - name: Run tests
-        run: pnpm test || echo "No tests configured yet"
+        run: pnpm test
+
+      - name: Run security check
+        run: pnpm audit --prod --audit-level=high
+        continue-on-error: false
 
       - name: Build static site
         run: pnpm build
@@ -52,3 +58,29 @@ jobs:
           publish_branch: gh-pages
           destination_dir: staging
           keep_files: true  # Preserve production and test deployments
+
+      - name: Comment PR with deployment URL
+        uses: actions/github-script@v7
+        if: always()
+        with:
+          script: |
+            const status = '${{ job.status }}';
+            const emoji = status === 'success' ? '✅' : '❌';
+            const deployUrl = 'https://sockshead.github.io/life-is-tempo/staging';
+
+            const message = `${emoji} **Staging Deployment ${status}**\n\n` +
+              (status === 'success'
+                ? `Preview URL: [${deployUrl}](${deployUrl})\n\n` +
+                  `- Linting: ✅ Passed\n` +
+                  `- Tests: ✅ Passed\n` +
+                  `- Security: ✅ Passed\n` +
+                  `- Build: ✅ Passed`
+                : `Deployment failed. Check the [workflow run](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}) for details.`
+              );
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
