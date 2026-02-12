@@ -2,13 +2,14 @@ name: Deploy to Production
 
 on:
   push:
-    branches: [develop]
+    branches: [master]  # ⚠️ CHANGED FROM [develop]
   workflow_dispatch:  # Allow manual deployment
 
 permissions:
   contents: write
   pages: write
   id-token: write
+  deployments: write
 
 jobs:
   build-and-deploy:
@@ -33,6 +34,12 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Run final validation
+        run: |
+          pnpm lint
+          pnpm test
+          pnpm audit --prod --audit-level=high
 
       - name: Build static site
         run: pnpm build
@@ -66,3 +73,42 @@ jobs:
           keep_files: true  # Preserve staging and test subdirectories
           # No destination_dir - deploys to root
           cname: false  # Set custom domain if needed
+
+      - name: Create deployment tag
+        run: |
+          VERSION=$(date +%Y.%m.%d-%H%M)
+          git tag -a "v${VERSION}" -m "Production deployment ${VERSION}"
+          git push origin "v${VERSION}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verify deployment health
+        run: |
+          echo "⏳ Waiting for GitHub Pages CDN propagation (60 seconds)..."
+          sleep 60
+
+          echo "🔍 Running health checks on critical routes..."
+          FAILED=0
+          BASE_URL="https://sockshead.github.io/life-is-tempo"
+
+          for route in "" "/en" "/es" "/en/blog"; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+                     -H "Cache-Control: no-cache" \
+                     -H "Pragma: no-cache" \
+                     "${BASE_URL}${route}")
+
+            if [ "$STATUS" -eq 200 ]; then
+              echo "✅ ${route:-/}: HTTP ${STATUS}"
+            else
+              echo "❌ ${route:-/}: HTTP ${STATUS} (FAILED)"
+              FAILED=1
+            fi
+          done
+
+          if [ $FAILED -eq 1 ]; then
+            echo "::error::Production health checks failed! Deployment may be broken."
+            echo "::error::Manual verification required. Consider rollback if site is down."
+            exit 1
+          fi
+
+          echo "✅ All production health checks passed"
