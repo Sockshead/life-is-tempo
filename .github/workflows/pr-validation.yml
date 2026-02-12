@@ -2,7 +2,7 @@ name: PR Validation
 
 on:
   pull_request:
-    branches: [main, develop, test]
+    branches: [master, develop, test]
 
 permissions:
   contents: read
@@ -30,27 +30,61 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run linter
+        id: lint
         run: pnpm lint
+        continue-on-error: true
 
       - name: Run tests
-        run: pnpm test || echo "No tests configured yet"
+        id: test
+        run: pnpm test
+        continue-on-error: true
+
+      - name: Run security check
+        id: security
+        run: pnpm audit --prod --audit-level=high
+        continue-on-error: true
 
       - name: Build static site
+        id: build
         run: pnpm build
         env:
           SKIP_ENV_VALIDATION: true
+        continue-on-error: true
 
       - name: Comment PR
         uses: actions/github-script@v7
         if: always()
         with:
           script: |
-            const status = '${{ job.status }}';
-            const emoji = status === 'success' ? '✅' : '❌';
-            const message = `${emoji} **PR Validation ${status}**\n\n` +
-              `- Linting: ${status === 'success' ? '✅ Passed' : '❌ Failed'}\n` +
-              `- Tests: ${status === 'success' ? '✅ Passed' : '❌ Failed'}\n` +
-              `- Build: ${status === 'success' ? '✅ Passed' : '❌ Failed'}`;
+            const lintStatus = '${{ steps.lint.outcome }}';
+            const testStatus = '${{ steps.test.outcome }}';
+            const securityStatus = '${{ steps.security.outcome }}';
+            const buildStatus = '${{ steps.build.outcome }}';
+
+            const allPassed = lintStatus === 'success' &&
+                             testStatus === 'success' &&
+                             securityStatus === 'success' &&
+                             buildStatus === 'success';
+
+            const emoji = allPassed ? '✅' : '❌';
+            const targetBranch = '${{ github.base_ref }}';
+
+            let message = `${emoji} **PR Validation Results (Target: ${targetBranch})**\n\n` +
+              `- Linting: ${lintStatus === 'success' ? '✅ Passed' : '❌ Failed'}\n` +
+              `- Tests: ${testStatus === 'success' ? '✅ Passed' : '❌ Failed'}\n` +
+              `- Security: ${securityStatus === 'success' ? '✅ Passed' : '❌ Failed'}\n` +
+              `- Build: ${buildStatus === 'success' ? '✅ Passed' : '❌ Failed'}\n\n`;
+
+            if (targetBranch === 'master') {
+              message += `⚠️ **Production PR** - This will deploy to production when merged. Ensure:\n` +
+                        `- All tests pass\n` +
+                        `- Staging has been validated\n` +
+                        `- At least 2 reviewers approved\n\n`;
+            }
+
+            if (!allPassed) {
+              message += `❌ **Cannot merge** - Fix failing checks before merging.`;
+            }
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -58,3 +92,8 @@ jobs:
               repo: context.repo.repo,
               body: message
             });
+
+            // Fail the workflow if any check failed
+            if (!allPassed) {
+              core.setFailed('One or more validation checks failed');
+            }
