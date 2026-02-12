@@ -49,6 +49,21 @@ cp .env.example .env.local
 pnpm dev
 ```
 
+## Development Workflow
+
+This project uses a promotion pipeline for deployments:
+
+```
+Feature → Test → Develop (Staging) → Master (Production)
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed workflow documentation.
+
+**Environment URLs:**
+- Production: https://sockshead.github.io/life-is-tempo
+- Staging: https://sockshead.github.io/life-is-tempo/staging
+- Test: https://sockshead.github.io/life-is-tempo/test
+
 Open [http://localhost:3000](http://localhost:3000) to see the application.
 
 ## Environment Setup
