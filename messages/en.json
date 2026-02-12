@@ -8,6 +8,7 @@
     "underground": "Underground Endurance"
   },
   "nav": {
+    "blog": "BLOG",
     "training": "TRAINING CHRONICLES",
     "dualLife": "DUAL LIFE TACTICS",
     "underground": "UNDERGROUND ENDURANCE"
@@ -15,15 +16,29 @@
   "hero": {
     "bpm": "BPM",
     "tagline": "Where Training Meets Techno",
-    "subtitle": "Personal chronicle of training for Berlin 70.3 from Colombia while living the techno scene. Real training, real parties, real talk about balancing both worlds.",
+    "subtitle": "Personal chronicle of training for Berlin 70.3 from Medellin while living the techno scene. Real training, real parties, real talk about balancing both worlds.",
     "cta": "Follow the Journey",
     "raceDistance": "Race Distance",
     "daysToBerlin": "Days to Berlin",
     "altitude": "Altitude (m)"
   },
+  "blog": {
+    "title": "Blog",
+    "allPosts": "All Posts",
+    "noPosts": "No posts yet. Check back soon.",
+    "featured": "Featured",
+    "categories": {
+      "training": "Training Chronicles",
+      "dual-life": "Dual Life Tactics",
+      "underground": "Underground Endurance"
+    },
+    "relatedPosts": "Related Posts",
+    "backToBlog": "Back to Blog",
+    "minuteRead": "{count} min read"
+  },
   "newsletter": {
     "title": "Join The Journey",
-    "subtitle": "214 days to Berlin. Weekly updates from Colombia to the finish line (and hopefully Berghain). Real training, real parties, real talk.",
+    "subtitle": "214 days to Berlin. Weekly updates from Medellin to the finish line (and hopefully Berghain). Real training, real parties, real talk.",
     "placeholder": "your@email.com",
     "submit": "Subscribe",
     "success": "Thanks for subscribing!",
@@ -31,11 +46,11 @@
   },
   "footer": {
     "tagline": "Life Is Tempo",
-    "about": "Training for Berlin 70.3 from Colombia. Documenting the journey where endurance training meets underground techno culture.",
+    "about": "Training for Berlin 70.3 from Medellin. Documenting the journey where endurance training meets underground techno culture.",
     "follow": "Follow",
     "subscribe": "Subscribe",
     "copyright": "All rights reserved.",
-    "location": "Bogota, Colombia",
+    "location": "Medellin, Colombia",
     "train": "Train",
     "live": "Live",
     "connect": "Connect",

@@ -15,6 +15,7 @@ const ContentSecurityPolicy = `
   font-src 'self' fonts.gstatic.com;
   img-src 'self' data: blob: *.googletagmanager.com *.google-analytics.com;
   connect-src 'self' *.googletagmanager.com *.google-analytics.com *.vercel-insights.com;
+  frame-src 'self' www.strava.com open.spotify.com w.soundcloud.com;
   frame-ancestors 'self';
   base-uri 'self';
   form-action 'self';
