@@ -42,8 +42,11 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className="dark">
-      <body className={`${bebasNeue.variable} ${jetBrainsMono.variable} antialiased`}>
+    <html lang={locale} className="dark" suppressHydrationWarning>
+      <body
+        className={`${bebasNeue.variable} ${jetBrainsMono.variable} antialiased`}
+        suppressHydrationWarning
+      >
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
