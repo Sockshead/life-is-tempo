@@ -7,18 +7,38 @@
     "tactics": "Tácticas de Vida Dual",
     "underground": "Resistencia Underground"
   },
+  "nav": {
+    "blog": "BLOG",
+    "training": "CRONICAS DE ENTRENAMIENTO",
+    "dualLife": "TACTICAS DE VIDA DUAL",
+    "underground": "RESISTENCIA UNDERGROUND"
+  },
   "hero": {
     "bpm": "BPM",
     "tagline": "Donde el Entrenamiento Encuentra el Techno",
-    "subtitle": "Crónica personal del entrenamiento para el Ironman 70.3 de Berlín desde Colombia mientras vivo la escena techno. Entrenamiento real, fiestas reales, charlas reales sobre balancear ambos mundos.",
+    "subtitle": "Crónica personal del entrenamiento para el Ironman 70.3 de Berlín desde Medellín mientras vivo la escena techno. Entrenamiento real, fiestas reales, charlas reales sobre balancear ambos mundos.",
     "cta": "Seguir el Viaje",
     "raceDistance": "Distancia de Carrera",
     "daysToBerlin": "Días a Berlín",
     "altitude": "Altitud (m)"
   },
+  "blog": {
+    "title": "Blog",
+    "allPosts": "Todas las Publicaciones",
+    "noPosts": "No hay publicaciones aún. Vuelve pronto.",
+    "featured": "Destacado",
+    "categories": {
+      "training": "Crónicas de Entrenamiento",
+      "dual-life": "Tácticas de Vida Dual",
+      "underground": "Resistencia Underground"
+    },
+    "relatedPosts": "Posts Relacionados",
+    "backToBlog": "Volver al Blog",
+    "minuteRead": "{count} min de lectura"
+  },
   "newsletter": {
     "title": "Únete al Viaje",
-    "subtitle": "214 días para Berlín. Actualizaciones semanales desde Colombia hasta la línea de meta (y esperemos que Berghain). Entrenamiento real, fiestas reales, charla real.",
+    "subtitle": "214 días para Berlín. Actualizaciones semanales desde Medellín hasta la línea de meta (y esperemos que Berghain). Entrenamiento real, fiestas reales, charla real.",
     "placeholder": "tu@email.com",
     "submit": "Suscribirse",
     "success": "¡Gracias por suscribirte!",
@@ -26,9 +46,21 @@
   },
   "footer": {
     "tagline": "Life Is Tempo",
-    "about": "Entrenando para el Ironman 70.3 de Berlín desde Colombia. Documentando el viaje donde el entrenamiento de resistencia se encuentra con la cultura techno underground.",
+    "about": "Entrenando para el Ironman 70.3 de Berlín desde Medellín. Documentando el viaje donde el entrenamiento de resistencia se encuentra con la cultura techno underground.",
     "follow": "Seguir",
     "subscribe": "Suscribirse",
-    "copyright": "Todos los derechos reservados."
+    "copyright": "Todos los derechos reservados.",
+    "location": "Medellin, Colombia",
+    "train": "Entrenar",
+    "live": "Vivir",
+    "connect": "Conectar",
+    "trainingChronicles": "Cronicas de Entrenamiento",
+    "berlin703": "Berlin 70.3",
+    "dualLifeTactics": "Tacticas de Vida Dual",
+    "undergroundEndurance": "Resistencia Underground",
+    "instagram": "Instagram",
+    "strava": "Strava",
+    "spotify": "Spotify",
+    "email": "Email"
   }
 }
