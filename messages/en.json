@@ -7,6 +7,11 @@
     "tactics": "Dual Life Tactics",
     "underground": "Underground Endurance"
   },
+  "nav": {
+    "training": "TRAINING CHRONICLES",
+    "dualLife": "DUAL LIFE TACTICS",
+    "underground": "UNDERGROUND ENDURANCE"
+  },
   "hero": {
     "bpm": "BPM",
     "tagline": "Where Training Meets Techno",
@@ -29,6 +34,18 @@
     "about": "Training for Berlin 70.3 from Colombia. Documenting the journey where endurance training meets underground techno culture.",
     "follow": "Follow",
     "subscribe": "Subscribe",
-    "copyright": "All rights reserved."
+    "copyright": "All rights reserved.",
+    "location": "Bogota, Colombia",
+    "train": "Train",
+    "live": "Live",
+    "connect": "Connect",
+    "trainingChronicles": "Training Chronicles",
+    "berlin703": "Berlin 70.3",
+    "dualLifeTactics": "Dual Life Tactics",
+    "undergroundEndurance": "Underground Endurance",
+    "instagram": "Instagram",
+    "strava": "Strava",
+    "spotify": "Spotify",
+    "email": "Email"
   }
 }
