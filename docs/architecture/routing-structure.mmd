@@ -1,0 +1,149 @@
+```mermaid
+graph TB
+    Start["User visits site"] --> Root["/"]
+
+    Root --> LocaleDetect{Locale Detection}
+
+    LocaleDetect -->|Browser Accept-Language: en| EN["/en"]
+    LocaleDetect -->|Browser Accept-Language: es| ES["/es"]
+    LocaleDetect -->|Default/Unknown| EN
+
+    EN --> ENPages["English Pages"]
+    ES --> ESPages["Spanish Pages"]
+
+    ENPages --> ENHome["/en - Homepage"]
+    ENPages --> ENAbout["/en/about - About Page"]
+    ENPages --> ENPosts["/en/posts - Blog Index"]
+    ENPages --> ENPost["/en/posts/[slug] - Blog Post"]
+
+    ESPages --> ESHome["/es - Homepage"]
+    ESPages --> ESAbout["/es/acerca - About Page"]
+    ESPages --> ESPosts["/es/posts - Blog Index"]
+    ESPages --> ESPost["/es/posts/[slug] - Blog Post"]
+
+    style Root fill:#e1f5ff
+    style LocaleDetect fill:#fff4e6
+    style EN fill:#d4edda
+    style ES fill:#d4edda
+    style ENPages fill:#f8f9fa
+    style ESPages fill:#f8f9fa
+
+    classDef implemented fill:#d4edda,stroke:#28a745
+    classDef planned fill:#fff3cd,stroke:#ffc107
+    classDef system fill:#e1f5ff,stroke:#007bff
+
+    class ENHome,ESHome,ENAbout,ESAbout implemented
+    class ENPosts,ESPosts,ENPost,ESPost planned
+    class Root,LocaleDetect system
+```
+
+## Routing Structure Explanation
+
+### Locale Detection Flow
+
+1. **User visits root path (`/`)**
+   - Next.js middleware intercepts request
+   - Checks `Accept-Language` header from browser
+   - Redirects to appropriate locale (`/en` or `/es`)
+
+2. **Locale persistence**
+   - Once locale is set, it persists in URL
+   - All navigation maintains current locale
+   - Users can manually switch via language selector
+
+### Path Localization
+
+**Localized Path Examples** (configured in `i18n/routing.ts`):
+
+| English Path | Spanish Path | Purpose |
+|--------------|--------------|---------|
+| `/en` | `/es` | Homepage |
+| `/en/about` | `/es/acerca` | About page |
+| `/en/posts` | `/es/posts` | Blog index |
+| `/en/posts/[slug]` | `/es/posts/[slug]` | Individual blog post |
+
+### Implementation Status
+
+- ✅ **Implemented**: Homepage (`/en`, `/es`), About page (`/en/about`, `/es/acerca`)
+- ⏳ **Planned**: Blog index and post pages (MDX content system)
+
+### Route Handlers
+
+**Current Directory Structure**:
+```
+app/
+├── [locale]/
+│   ├── page.tsx        # Homepage (implemented)
+│   ├── layout.tsx      # Root layout with locale provider
+│   └── about/
+│       └── page.tsx    # About page (planned)
+```
+
+**Planned Structure** (when blog is implemented):
+```
+app/
+├── [locale]/
+│   ├── posts/
+│   │   ├── page.tsx           # Blog index
+│   │   └── [slug]/
+│   │       └── page.tsx       # Individual post
+```
+
+### Dynamic Routing
+
+**Blog Post URLs** (planned):
+- English: `/en/posts/training-week-1`
+- Spanish: `/es/posts/semana-entrenamiento-1`
+
+**Slug generation** (from MDX frontmatter):
+```typescript
+// content/en/posts/2026-02-11-training-week-1.mdx
+---
+title: "Training Week 1: Getting Started"
+slug: "training-week-1"  // Used in URL
+---
+```
+
+### Middleware Logic
+
+**Current Middleware** (simplified):
+```typescript
+import { routing } from './i18n/routing';
+
+export default createMiddleware(routing);
+
+export const config = {
+  matcher: ['/((?!api|_next|.*\\..*).*)']
+};
+```
+
+**What it does**:
+1. Matches all paths except API routes, Next.js internals, static files
+2. Checks current locale from URL or browser
+3. Redirects to appropriate locale if needed
+4. Preserves query parameters and path segments
+
+### SEO Considerations
+
+**Language Alternates** (implemented via next-intl):
+```html
+<link rel="alternate" hreflang="en" href="https://lifeistempo.com/en" />
+<link rel="alternate" hreflang="es" href="https://lifeistempo.com/es" />
+<link rel="alternate" hreflang="x-default" href="https://lifeistempo.com/en" />
+```
+
+**Canonical URLs**:
+- Each locale has separate canonical URL
+- Prevents duplicate content issues
+- Search engines index each language separately
+
+### Future Enhancements
+
+- 🔄 **Locale Switching**: UI component to switch between languages
+- 🔄 **Locale Persistence**: Store user preference in cookie/localStorage
+- 🔄 **More Locales**: Add Portuguese (pt) for Brazilian audience
+- 🔄 **Automatic Translation**: Use AI to draft Spanish versions of English posts
+
+---
+
+**Diagram last updated**: 2026-02-11
