@@ -17,6 +17,9 @@ export const routing = defineRouting({
       en: '/about',
       es: '/acerca',
     },
+    '/training': '/training',
+    '/dual-life': '/dual-life',
+    '/underground': '/underground',
   },
 });
 
