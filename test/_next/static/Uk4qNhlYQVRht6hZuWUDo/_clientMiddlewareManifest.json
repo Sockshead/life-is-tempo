@@ -1,0 +1,6 @@
+[
+  {
+    "regexp": "^\\/life-is-tempo\\/test(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/((?!api|_next|_vercel|.*\\..*).*))(\\.json)?[\\/#\\?]?$",
+    "originalSource": "/((?!api|_next|_vercel|.*\\..*).*)"
+  }
+]
