@@ -5,16 +5,11 @@ import { cn } from '@/lib/utils'
 import { Badge, categoryBadgeVariant } from '@/components/UI/Badge'
 import type { Post } from '@/lib/blog-utils'
 import { formatDate } from '@/lib/blog-utils'
+import { featuredCoverGradients } from './constants'
 
 export interface FeaturedPostProps {
   post: Post
   className?: string
-}
-
-const coverGradients: Record<string, string> = {
-  training: 'from-brand-purple/20 via-gray-950/80 to-gray-950',
-  'dual-life': 'from-brand-blue/20 via-gray-950/80 to-gray-950',
-  underground: 'from-brand-cyan/20 via-gray-950/80 to-gray-950',
 }
 
 /**
@@ -24,7 +19,7 @@ const coverGradients: Record<string, string> = {
  */
 export function FeaturedPost({ post, className }: FeaturedPostProps) {
   const badgeVariant = categoryBadgeVariant[post.category] ?? 'cyan'
-  const gradient = coverGradients[post.category] ?? 'from-brand-cyan/20 via-gray-950/80 to-gray-950'
+  const gradient = featuredCoverGradients[post.category] ?? 'from-brand-cyan/20 via-gray-950/80 to-gray-950'
 
   return (
     <Link
@@ -62,7 +57,7 @@ export function FeaturedPost({ post, className }: FeaturedPostProps) {
             {post.excerpt}
           </p>
 
-          <div className="flex items-center gap-4 mt-4 font-mono text-xs text-gray-600">
+          <div className="flex items-center gap-4 mt-4 font-mono text-xs text-gray-400">
             {post.readTime && (
               <span>{post.readTime} min read</span>
             )}
