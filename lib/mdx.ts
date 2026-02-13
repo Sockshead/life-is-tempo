@@ -61,6 +61,7 @@ export function getAllPosts(
 
   return filenames
     .map((f) => getPostBySlug(f.replace(/\.mdx$/, ''), locale))
+    .filter(({ frontmatter }) => frontmatter.published !== false)
     .sort(
       (a, b) =>
         new Date(b.frontmatter.date).getTime() -

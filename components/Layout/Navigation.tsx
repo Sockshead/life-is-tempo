@@ -11,11 +11,12 @@ interface NavigationProps {
 }
 
 interface NavItem {
-  key: 'training' | 'dualLife' | 'underground'
-  href: '/training' | '/dual-life' | '/underground'
+  key: 'blog' | 'training' | 'dualLife' | 'underground'
+  href: '/blog' | '/training' | '/dual-life' | '/underground'
 }
 
 const navItems: NavItem[] = [
+  { key: 'blog', href: '/blog' },
   { key: 'training', href: '/training' },
   { key: 'dualLife', href: '/dual-life' },
   { key: 'underground', href: '/underground' },

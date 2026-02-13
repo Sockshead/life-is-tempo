@@ -5,7 +5,6 @@ export const locales = ['en', 'es'] as const;
 export type Locale = (typeof locales)[number];
 
 export default getRequestConfig(async ({ locale }) => {
-  // For static export, we need to use the locale from params instead of requestLocale
   // Ensure that a valid locale is used
   if (!locale || !locales.includes(locale as Locale)) {
     locale = 'en';

@@ -3,6 +3,8 @@
  * Pure functions with no client-side dependencies.
  */
 
+import type { PostFrontmatter } from './schemas/post'
+
 export interface Post {
   slug: string
   title: string
@@ -15,6 +17,55 @@ export interface Post {
   locale: string
   featured?: boolean
   tags?: string[]
+}
+
+/**
+ * Map PostFrontmatter (from MDX/Zod) to Post (used by Blog components).
+ * Bridges the `date` → `publishedAt` field difference.
+ */
+export function toPost(frontmatter: PostFrontmatter): Post {
+  return {
+    slug: frontmatter.slug,
+    title: frontmatter.title,
+    excerpt: frontmatter.excerpt ?? '',
+    category: frontmatter.category,
+    publishedAt: frontmatter.date,
+    coverImage: frontmatter.coverImage,
+    readTime: frontmatter.readTime,
+    bpm: frontmatter.bpm,
+    locale: frontmatter.locale,
+    featured: frontmatter.featured,
+    tags: frontmatter.tags,
+  }
+}
+
+export interface HeadingItem {
+  id: string
+  text: string
+  level: 2 | 3
+}
+
+/**
+ * Extract h2/h3 headings from raw MDX content for table of contents.
+ * Slugify logic mirrors MDXComponents.tsx heading ID generation.
+ */
+export function extractHeadings(content: string): HeadingItem[] {
+  const headingRegex = /^(#{2,3})\s+(.+)$/gm
+  const headings: HeadingItem[] = []
+  let match
+
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length as 2 | 3
+    const text = match[2].trim()
+    const id = text
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
+
+    headings.push({ id, text, level })
+  }
+
+  return headings
 }
 
 /**

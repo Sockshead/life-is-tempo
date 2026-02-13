@@ -26,6 +26,7 @@ describe('Navigation', () => {
     it('renders all navigation links', () => {
       render(<Navigation locale="en" />)
 
+      expect(screen.getByText('blog')).toBeInTheDocument()
       expect(screen.getByText('training')).toBeInTheDocument()
       expect(screen.getByText('dualLife')).toBeInTheDocument()
       expect(screen.getByText('underground')).toBeInTheDocument()
@@ -51,7 +52,7 @@ describe('Navigation', () => {
       expect(list).toBeInTheDocument()
 
       const items = screen.getAllByRole('listitem')
-      expect(items).toHaveLength(3)
+      expect(items).toHaveLength(4)
     })
   })
 
