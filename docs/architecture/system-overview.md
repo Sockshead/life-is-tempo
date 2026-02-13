@@ -77,6 +77,23 @@ Life Is Tempo is a **frontend-only** application built with Next.js 16 App Route
 | Zod | 4.3.6 | Schema validation |
 | @t3-oss/env-nextjs | 0.13.10 | Environment variable validation |
 
+### Testing
+
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| Jest | 30.2.0 | Testing framework |
+| @testing-library/react | 16.3.2 | Component testing |
+| @testing-library/jest-dom | 6.9.1 | DOM matchers |
+| @testing-library/user-event | 14.6.1 | User interaction simulation |
+
+### Content Processing
+
+| Technology | Purpose |
+|------------|---------|
+| gray-matter | Frontmatter parsing |
+| next-mdx-remote | MDX rendering |
+| lucide-react | Icon library |
+
 ### Development Tools
 
 | Tool | Purpose |
@@ -186,18 +203,19 @@ pathnames: {
 
 ### 4. Content-as-Code (MDX)
 
-**Planned Architecture** (not yet implemented):
+**Current Structure**:
 
 ```
 content/
-├── en/
-│   └── posts/
-│       ├── 2026-02-11-training-week-1.mdx
-│       └── 2026-02-18-techno-recovery.mdx
-└── es/
-    └── posts/
-        ├── 2026-02-11-semana-entrenamiento-1.mdx
-        └── 2026-02-18-recuperacion-techno.mdx
+└── posts/
+    ├── en/
+    │   ├── balancing-sets-and-intervals.mdx
+    │   ├── first-tempo-training-in-bogota.mdx
+    │   └── underground-endurance-warehouse-to-track.mdx
+    └── es/
+        ├── equilibrando-sets-e-intervalos.mdx
+        ├── primer-tempo-entrenamiento-en-bogota.mdx
+        └── resistencia-underground-del-warehouse-a-la-pista.mdx
 ```
 
 **Content Flow**:
@@ -412,7 +430,7 @@ See [security-architecture.md](./security-architecture.md) for detailed security
 - Automated dependency scanning (Dependabot)
 - Secret scanning (GitHub)
 - Code scanning (CodeQL, planned)
-- Rate limiting on API routes (planned)
+- Rate limiting utilities available in `lib/security.ts` (not wired to routes)
 
 ---
 
@@ -432,26 +450,16 @@ See [security-architecture.md](./security-architecture.md) for detailed security
 - Analytics (client-side tracking)
 - Simple forms (external service)
 
-### Component Architecture (To Be Implemented)
+### Component Architecture
 
-**Planned Component Structure**:
+**32 components across 5 categories**:
 ```
 components/
-├── layout/
-│   ├── Header.tsx         # Global header with navigation
-│   ├── Footer.tsx         # Global footer
-│   └── Navigation.tsx     # Multi-language nav links
-├── ui/
-│   ├── Button.tsx         # Reusable button component
-│   ├── Card.tsx           # Content cards
-│   └── Badge.tsx          # Category/tag badges
-├── blog/
-│   ├── PostCard.tsx       # Blog post preview
-│   ├── PostList.tsx       # Blog post listing
-│   └── CategoryFilter.tsx # Filter posts by category
-└── forms/
-    ├── NewsletterSignup.tsx  # Newsletter form
-    └── ContactForm.tsx       # Contact form
+├── Blog/           # 7 components (PostCard, FeaturedPost, CategoryFilter, ...)
+├── Layout/         # 7 components (Header, Footer, Navigation, MobileMenu, ...)
+├── MDX/            # 8 components (CalloutBox, AudioEmbed, StravaEmbed, ...)
+├── Metrics/        # 4 components (BPMCounter, StatCard, ProgressBar, ...)
+└── UI/             # 6 components (Button, Card, Badge, Input, Skeleton, Toast)
 ```
 
 **Component Design Principles**:
@@ -502,4 +510,4 @@ components/
 
 ---
 
-**Last Reviewed**: 2026-02-11
+**Last Reviewed**: 2026-02-12

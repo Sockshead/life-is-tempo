@@ -81,7 +81,7 @@ This document tracks the security hardening implementation for Life Is Tempo.
 
 ### Branch Protection Rules
 - [ ] Navigate to Settings → Branches
-- [ ] Add rule for `main` branch:
+- [ ] Add rule for `master` branch:
   - [ ] Require pull request reviews (minimum 1)
   - [ ] Require status checks to pass
   - [ ] Require branches to be up to date
@@ -216,5 +216,5 @@ Current implementation should achieve:
 
 ---
 
-**Last Updated**: 2026-02-11
+**Last Updated**: 2026-02-12
 **Next Review**: Before first production deployment

@@ -6,7 +6,7 @@
 
 ## Overview
 
-Life Is Tempo has **29 React components** across 5 categories, all with full test coverage (469 tests) and Storybook documentation.
+Life Is Tempo has **32 React components** across 5 categories, with 637 tests across 25 test suites and Storybook documentation.
 
 **Interactive docs**: Run `pnpm storybook` to browse components at `localhost:6006`.
 
@@ -37,13 +37,14 @@ Life Is Tempo has **29 React components** across 5 categories, all with full tes
 | **PageLayout** | `children`, `locale` | Header + main + Footer wrapper with skip-to-content link |
 | **Section** | `children`, `py`, `id` | Responsive container with padding sizes (none/sm/md/lg/xl) |
 
-### Blog Components (6)
+### Blog Components (7)
 
 | Component | Props | Description |
 |-----------|-------|-------------|
 | **PostCard** | `post`, `variant` | Blog card with default/featured/compact variants |
 | **FeaturedPost** | `post` | Hero-style 16:9/21:9 post card with gradient cover |
 | **CategoryFilter** | `categories`, `activeCategory`, `onCategoryChange` | Horizontal filter bar with category buttons |
+| **CategoryPageContent** | `category`, `posts`, `locale` | Full category page layout with filtered posts |
 | **ReadingProgress** | `category` | Fixed top progress bar colored by category |
 | **RelatedPosts** | `currentPostSlug`, `category`, `posts`, `limit`, `locale` | Smart related posts (same category first, then recent) |
 | **TableOfContents** | `items` | Sticky sidebar TOC with IntersectionObserver active tracking |
@@ -57,7 +58,7 @@ Life Is Tempo has **29 React components** across 5 categories, all with full tes
 | **ProgressBar** | `value`, `variant`, `color`, `size`, `showLabel`, `glow` | Linear and circular progress bars with gradient fill |
 | **StatCard** | `title`, `description`, `metrics`, `columns`, `glass`, `glow` | Grid of MetricDisplay components in a Card |
 
-### MDX Components (6)
+### MDX Components (8)
 
 | Component | Props | Description |
 |-----------|-------|-------------|
@@ -94,3 +95,9 @@ Fonts: **Bebas Neue** (display/headings), **JetBrains Mono** (body/mono).
 - [Storybook Guide](../development/storybook.md) — Running and writing stories
 - [System Architecture](../architecture/system-overview.md) — Component architecture overview
 - [Getting Started](../development/getting-started.md) — Development setup
+
+---
+
+**Last Updated**: 2026-02-12
+
+**Issues**: https://github.com/Sockshead/life-is-tempo/issues

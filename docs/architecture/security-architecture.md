@@ -238,14 +238,13 @@ export async function POST(request: Request) {
 - Return user-friendly error messages
 - Never trust client-side validation alone
 
-#### Rate Limiting (Planned)
+#### Rate Limiting
 
-**Planned Implementation**: API routes with `@upstash/ratelimit` or similar
+**Current State**: Utility functions exist in `lib/security.ts` (rate limiter, email validation, honeypot) but are not wired to any routes since no API routes exist yet.
 
-**Target Routes**:
+**Available presets** (in `lib/security.ts`):
 - Newsletter signup: 3 requests per 15 minutes per IP
 - Contact form: 5 requests per hour per IP
-- AI content generation (future): 10 requests per day per IP
 
 **Example Implementation**:
 ```typescript
@@ -369,7 +368,7 @@ pnpm list --depth=0
 ### Reporting Process
 
 **Public Disclosure**:
-1. GitHub Security Advisories: https://github.com/juancmandev/life-is-tempo/security
+1. GitHub Security Advisories: https://github.com/Sockshead/life-is-tempo/security
 2. Email: security@lifeistempo.com
 
 **Response Timeline**:
@@ -568,10 +567,10 @@ pnpm list --depth=0
 
 **Reporting Vulnerabilities**:
 - Email: security@lifeistempo.com
-- GitHub: https://github.com/juancmandev/life-is-tempo/security
+- GitHub: https://github.com/Sockshead/life-is-tempo/security
 
 **General Inquiries**:
-- GitHub Issues: https://github.com/juancmandev/life-is-tempo/issues
+- GitHub Issues: https://github.com/Sockshead/life-is-tempo/issues
 
 ---
 

@@ -15,7 +15,7 @@ Life Is Tempo uses **MDX** (Markdown + JSX) for blog content. This guide covers 
 
 ---
 
-## Content Structure (Planned)
+## Content Structure
 
 ### Directory Organization
 
@@ -58,7 +58,7 @@ YYYY-MM-DD-slug.mdx
 ---
 title: "Post Title (60 chars max for SEO)"
 date: "2026-02-11"
-author: "Juan Camilo"
+author: "Ultra Choko"
 category: "training-chronicles"
 tags: ["training", "running", "colombia"]
 excerpt: "Brief 1-2 sentence summary for preview cards..."
@@ -84,7 +84,7 @@ readingTime: 5   # Minutes (auto-calculated if omitted)
 ---
 title: "Training Week 1: Getting Started with 70.3 Prep"
 date: "2026-02-11"
-author: "Juan Camilo"
+author: "Ultra Choko"
 category: "training-chronicles"
 tags: ["training", "triathlon", "70.3", "colombia", "berlin"]
 excerpt: "First week of structured training for Berlin 70.3 from Bogotá. Learning to balance altitude training with techno nights."
@@ -233,7 +233,7 @@ touch content/es/posts/$(date +%Y-%m-%d)-mi-slug-articulo.mdx
 ---
 title: "Your Post Title"
 date: "2026-02-11"
-author: "Juan Camilo"
+author: "Ultra Choko"
 category: "training-chronicles"
 tags: ["training", "triathlon"]
 excerpt: "Brief summary..."
@@ -662,4 +662,4 @@ seriesOrder: 1
 **Need Help?**
 - MDX Documentation: https://mdxjs.com
 - Markdown Guide: https://www.markdownguide.org
-- Project Issues: https://github.com/juancmandev/life-is-tempo/issues
+- Project Issues: https://github.com/Sockshead/life-is-tempo/issues

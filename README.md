@@ -1,270 +1,200 @@
 # Life Is Tempo
 
-> 🏃‍♂️ Training for Berlin 70.3 (Ironman) from Colombia 🇨🇴 • Underground Techno Culture 🎵 • Personal Documentation
+A production-ready Next.js blog starter with i18n, MDX, a custom design system, and 637 tests out of the box.
 
-A personal blog and newsletter platform documenting the journey of endurance sports training while immersed in techno culture. Chronicles the intersection of athletic dedication, music passion, and productivity systems.
+[![Deployed on Vercel](https://img.shields.io/badge/deployed-vercel-black?logo=vercel)](https://lifeistempo.com)
+[![Security Headers](https://img.shields.io/badge/security-hardened-green?logo=shield)](./SECURITY.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Tests](https://img.shields.io/badge/tests-637%20passing-brightgreen)](./docs/development/getting-started.md)
 
-[![Deployment Status](https://img.shields.io/badge/deployment-vercel-black?logo=vercel)](https://vercel.com)
-[![Security Headers](https://img.shields.io/badge/security-hardened-green?logo=shield)](./docs/architecture/security-architecture.md)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+---
 
-## ✨ Features
+## What You Get
 
-- 🌍 **Multi-language**: English and Spanish with automatic detection
-- 📝 **MDX Blog**: Markdown + React components for rich content
-- 📧 **Newsletter**: Subscriber management with double opt-in
-- 🎨 **Modern UI**: Tailwind CSS 4 with responsive design
-- 🔒 **Security-First**: Comprehensive headers, validation, and scanning
-- ⚡ **Performance**: Next.js 16 with React 19 Server Components
-- 🌐 **Global CDN**: Vercel Edge Network with <50ms latency
+- **32 React components** across 5 categories (Blog, Layout, MDX, Metrics, UI)
+- **637 tests** across 25 test suites with 80% coverage threshold
+- **6 MDX blog posts** (3 English + 3 Spanish) as starter content
+- **Full i18n** with next-intl (English/Spanish, localized routing)
+- **Custom design system** with colors, typography, glassmorphism effects
+- **Security headers** (CSP, HSTS, X-Frame-Options, and more)
+- **CI/CD pipeline** with Vercel auto-deploy (develop = staging, master = production)
+- **Vercel-ready** with zero configuration needed
+
+---
+
+## Tech Stack
+
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| Next.js | 16.1.6 | React framework (App Router) |
+| React | 19.2.3 | UI library |
+| TypeScript | 5.x | Type safety |
+| Tailwind CSS | 4.x | Utility-first styling |
+| next-intl | 4.8.2 | Multi-language support (EN/ES) |
+| MDX | @next/mdx 3.1.1 | Markdown with JSX components |
+| Jest | 30.2.0 | Testing framework |
+| Testing Library | 16.3.2 | Component testing |
+| Zod | 4.3.6 | Schema validation |
+| gray-matter | latest | Frontmatter parsing |
+| next-mdx-remote | latest | MDX rendering |
+| lucide-react | latest | Icon library |
+| @t3-oss/env-nextjs | 0.13.10 | Environment variable validation |
+
+---
+
+## Use as Template
+
+```bash
+# Clone
+git clone https://github.com/Sockshead/life-is-tempo.git my-blog
+cd my-blog
+
+# Install
+pnpm install
+
+# Start developing
+pnpm dev
+```
+
+### Customize
+
+1. Replace content in `content/posts/en/` and `content/posts/es/` with your own MDX posts
+2. Update `messages/en.json` and `messages/es.json` with your copy
+3. Edit `app/[locale]/page.tsx` for your homepage
+4. Swap colors in the design system (Tailwind config)
+5. Configure your domain in Vercel
+
+---
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ or Bun
-- pnpm (recommended) or npm
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/juancmandev/life-is-tempo.git
-cd life-is-tempo
-```
-
-2. Install dependencies:
-```bash
-pnpm install
-```
-
-3. Set up environment variables:
-```bash
-cp .env.example .env.local
-# Edit .env.local with your configuration
-```
-
-4. Run the development server:
-```bash
-pnpm dev
-```
-
-## Development Workflow
-
-This project uses a promotion pipeline for deployments:
-
-```
-Feature → PR to Develop (preview) → Develop (staging) → Master (Production)
-```
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed workflow documentation.
-
-**Environment URLs:**
-- Production: https://lifeistempo.com (master, auto-deployed via Vercel)
-- Staging: develop branch (auto-deployed via Vercel)
-- Preview: Automatic per-PR preview deployments on Vercel
-
-Open [http://localhost:3000](http://localhost:3000) to see the application.
-
-## Environment Setup
-
-This project uses environment variables for configuration. See `.env.example` for all available options.
-
-**Required variables:**
-- None for basic development
-
-**Optional variables:**
-- `NEXT_PUBLIC_GA_MEASUREMENT_ID` - Google Analytics tracking ID
-- `NEWSLETTER_API_KEY` - Newsletter service API key
-- `NEWSLETTER_AUDIENCE_ID` - Newsletter list ID
-
-See [.env.example](./.env.example) for the complete list.
-
-## Security
-
-We take security seriously. This project implements:
-
-- ✅ Comprehensive security headers (CSP, HSTS, X-Frame-Options)
-- ✅ Environment variable validation at build time
-- ✅ Automated dependency vulnerability scanning
-- ✅ Input validation and sanitization
-- ✅ Rate limiting on API routes
-
-See [SECURITY.md](./SECURITY.md) for:
-- How to report security vulnerabilities
-- Security best practices
-- Supported versions
-
-## 📖 Documentation
-
-Comprehensive documentation available in [`/docs`](./docs):
-
-### Architecture
-- **[System Overview](./docs/architecture/system-overview.md)** - High-level architecture and technology stack
-- **[Security Architecture](./docs/architecture/security-architecture.md)** - Security implementation and threat model
-- **[Architecture Diagrams](./docs/architecture/diagrams.md)** - Mermaid diagrams (routing, security, deployment)
-
-### Deployment
-- **[Vercel Deployment Guide](./docs/deployment/vercel-deployment.md)** - Deployment strategy and configuration
-- **[Environment Variables](./docs/deployment/environment-variables.md)** - Complete variable reference
-
-### Development
-- **[Getting Started](./docs/development/getting-started.md)** - Local setup and development workflow
-- **[Content Authoring](./docs/development/content-authoring.md)** - Writing blog posts with MDX
-- **[Internationalization](./docs/development/internationalization.md)** - Multi-language workflow
-
-### Components
-- **[Component Catalog](./docs/components/README.md)** - Reusable component documentation
-
-### Project-Specific Patterns
-- **[CLAUDE.md](./CLAUDE.md)** - Development patterns and conventions
-
----
-
-## 🏗️ Architecture
-
-```mermaid
-graph TB
-    Browser["👤 User Browser"]
-    Edge["☁️ Vercel Edge Network"]
-    NextJS["⚡ Next.js App<br/>• SSG/SSR<br/>• Multi-language<br/>• Security Middleware"]
-    External["🔌 External Services<br/>• Newsletter<br/>• Analytics"]
-
-    Browser -->|HTTPS| Edge
-    Edge -->|Route to origin| NextJS
-    NextJS -.->|API Calls| External
-
-    style Browser fill:#e3f2fd
-    style Edge fill:#f3e5f5
-    style NextJS fill:#e8f5e9
-    style External fill:#fff3e0
-```
-
-**Key Characteristics**:
-- **Frontend-Only**: No backend APIs (static site + external services)
-- **Multi-Language**: Automatic locale detection with next-intl
-- **Security-First**: Defense-in-depth with multiple security layers
-- **Global CDN**: Edge network for fast worldwide access
-
-See [System Overview](./docs/architecture/system-overview.md) for detailed architecture.
-
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-
 - **Node.js** 18.17+ or 20.x LTS
-- **pnpm** 8.0+ (recommended)
+- **pnpm** 8.0+
 - **Git** 2.30+
 
-### Installation
+### Install & Run
+
+```bash
+pnpm install
+cp .env.example .env.local   # All variables optional for development
+pnpm dev                      # http://localhost:3000
+```
 
 ### Scripts
 
-- `pnpm dev` - Start development server
-- `pnpm build` - Build for production
-- `pnpm start` - Start production server
-- `pnpm lint` - Run ESLint
-- `pnpm security-check` - Check for dependency vulnerabilities
+| Script | Description |
+|--------|-------------|
+| `pnpm dev` | Start development server |
+| `pnpm build` | Build for production |
+| `pnpm start` | Start production server |
+| `pnpm lint` | Run ESLint |
+| `pnpm test` | Run Jest test suite |
+| `pnpm test:watch` | Run tests in watch mode |
+| `pnpm test:coverage` | Run tests with coverage report |
+| `pnpm security-check` | Check for dependency vulnerabilities |
 
-### Code Style
+---
 
-This project uses:
-- TypeScript for type safety
-- ESLint for code quality
-- Prettier for code formatting (planned)
+## Project Structure
 
-## Tech Stack
+```
+life-is-tempo/
+├── app/
+│   └── [locale]/              # Multi-language routes (en/es)
+│       ├── layout.tsx
+│       ├── page.tsx
+│       └── blog/              # Blog pages
+├── components/
+│   ├── Blog/                  # 7 components (PostCard, FeaturedPost, CategoryFilter, ...)
+│   ├── Layout/                # 7 components (Header, Footer, Navigation, MobileMenu, ...)
+│   ├── MDX/                   # 8 components (CalloutBox, AudioEmbed, StravaEmbed, ...)
+│   ├── Metrics/               # 4 components (BPMCounter, StatCard, ProgressBar, ...)
+│   └── UI/                    # 6 components (Button, Card, Badge, Input, Skeleton, Toast)
+├── content/
+│   └── posts/
+│       ├── en/                # 3 English MDX posts
+│       └── es/                # 3 Spanish MDX posts
+├── lib/                       # Utilities (env validation, security, blog helpers)
+├── messages/                  # i18n translations (en.json, es.json)
+├── i18n/                      # next-intl routing and config
+├── public/                    # Static assets
+└── docs/                      # Architecture, deployment, and dev guides
+```
 
-- **Framework**: Next.js 16 (App Router)
-- **UI**: React 19, Tailwind CSS 4
-- **Content**: MDX
-- **Internationalization**: next-intl
-- **Type Safety**: TypeScript, Zod
-- **Security**: @t3-oss/env-nextjs
+---
+
+## Components
+
+| Category | Count | Components |
+|----------|-------|------------|
+| **Blog** | 7 | CategoryFilter, CategoryPageContent, FeaturedPost, PostCard, ReadingProgress, RelatedPosts, TableOfContents |
+| **Layout** | 7 | Footer, Header, LanguageSwitcher, MobileMenu, Navigation, PageLayout, Section |
+| **MDX** | 8 | AudioEmbed, BPMIndicator, CalloutBox, ImageGrid, MDXComponents, MDXLayout, MetricBox, StravaEmbed |
+| **Metrics** | 4 | BPMCounter, MetricDisplay, ProgressBar, StatCard |
+| **UI** | 6 | Badge, Button, Card, Input, Skeleton, Toast |
+
+---
+
+## Design System
+
+- **Colors**: Custom palette with accent colors for training/techno themes
+- **Typography**: System font stack with responsive sizing
+- **Effects**: Glassmorphism, gradient overlays, animated BPM counters
+- **Layout**: Responsive grid with mobile-first breakpoints
+- **Dark mode**: Planned
+
+---
 
 ## Deployment
 
-### Vercel (Recommended)
+This project deploys to Vercel with a promotion pipeline:
 
-1. Push your code to GitHub
-2. Import the project in [Vercel](https://vercel.com)
-3. Configure environment variables in Vercel dashboard
-4. Deploy!
+```
+Feature Branch → PR to develop (preview URL) → develop (staging) → master (production)
+```
 
-See [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for other platforms.
+- **Production**: https://lifeistempo.com (auto-deploys on merge to `master`)
+- **Staging**: Auto-deploys on merge to `develop`
+- **Preview**: Automatic per-PR deployments
 
-## 🤝 Contributing
+No environment variables are required for basic deployment. See [Environment Variables](./docs/deployment/environment-variables.md) for optional configuration.
 
-Contributions are welcome! Please follow these steps:
+---
 
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Test** your changes:
-   ```bash
-   pnpm lint          # Run linting
-   pnpm build         # Verify build succeeds
-   pnpm security-check # Check vulnerabilities
-   ```
-5. **Push** to your branch (`git push origin feature/amazing-feature`)
-6. **Open** a Pull Request
+## Documentation
 
-**Before Submitting**:
-- Review [Development Guidelines](./docs/development/getting-started.md)
-- Follow code standards in [CLAUDE.md](./CLAUDE.md)
-- Add tests for new features (when test suite is implemented)
-- Update documentation if needed
+- [System Architecture](./docs/architecture/system-overview.md)
+- [Security Architecture](./docs/architecture/security-architecture.md)
+- [Architecture Diagrams](./docs/architecture/diagrams.md)
+- [Vercel Deployment](./docs/deployment/vercel-deployment.md)
+- [Environment Variables](./docs/deployment/environment-variables.md)
+- [Getting Started](./docs/development/getting-started.md)
+- [Content Authoring](./docs/development/content-authoring.md)
+- [Internationalization](./docs/development/internationalization.md)
+- [Component Catalog](./docs/components/README.md)
 
-**Need Help?** Check out our [Getting Started Guide](./docs/development/getting-started.md) or open an issue.
+---
+
+## Security
+
+Security headers are applied globally via `next.config.ts`: CSP (production only), HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and Permissions-Policy.
+
+See [SECURITY.md](./SECURITY.md) for the vulnerability reporting process.
+
+---
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the branch strategy, CI/CD workflow, and PR process.
+
+---
 
 ## License
 
-This project is open source and available under the [MIT License](./LICENSE).
-
-## 📚 Learn More
-
-### Project Documentation
-- [Architecture Overview](./docs/architecture/system-overview.md)
-- [Deployment Guide](./docs/deployment/vercel-deployment.md)
-- [Development Setup](./docs/development/getting-started.md)
-- [Security Policy](./SECURITY.md)
-
-### Framework Documentation
-- [Next.js Docs](https://nextjs.org/docs) - Next.js framework
-- [React Docs](https://react.dev) - React library
-- [Tailwind CSS](https://tailwindcss.com/docs) - Utility-first CSS
-- [next-intl](https://next-intl-docs.vercel.app) - Internationalization
-- [MDX](https://mdxjs.com) - Markdown with JSX
-
-### Platform
-- [Vercel Docs](https://vercel.com/docs) - Deployment platform
-- [Vercel CLI](https://vercel.com/docs/cli) - Command-line interface
+[MIT](./LICENSE)
 
 ---
 
-## 📬 Contact
-
-- **Website**: [lifeistempo.com](https://lifeistempo.com)
-- **Email**: security@lifeistempo.com (for security concerns)
-- **GitHub**: [@juancmandev](https://github.com/juancmandev)
-- **Issues**: [GitHub Issues](https://github.com/juancmandev/life-is-tempo/issues)
-
----
-
-## 📄 License
-
-This project is open source and available under the [MIT License](./LICENSE).
-
----
-
-<div align="center">
-
-**Built with ❤️ by Juan Carlos Martínez**
-
-Training for Berlin 70.3 • Techno Culture • Colombia 🇨🇴 → Berlin 🇩🇪
-
-[Website](https://lifeistempo.com) • [Documentation](./docs) • [Security](./SECURITY.md)
-
-</div>
+Built by **Ultra Choko**

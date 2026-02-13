@@ -64,7 +64,7 @@ vercel
 1. Visit https://vercel.com/new
 2. Click "Import Git Repository"
 3. Authorize Vercel to access your GitHub account
-4. Select `juancmandev/life-is-tempo` repository
+4. Select `Sockshead/life-is-tempo` repository
 5. Configure project:
    - **Framework Preset**: Next.js (auto-detected)
    - **Root Directory**: `./` (default)
@@ -674,4 +674,4 @@ export async function generateStaticParams() {
 **Need Help?**
 - Vercel Documentation: https://vercel.com/docs
 - Vercel Support: https://vercel.com/support
-- Project Issues: https://github.com/juancmandev/life-is-tempo/issues
+- Project Issues: https://github.com/Sockshead/life-is-tempo/issues

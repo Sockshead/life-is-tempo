@@ -1,5 +1,7 @@
 # Contributing to Life Is Tempo
 
+> Maintained by **Ultra Choko** ([@Sockshead](https://github.com/Sockshead))
+
 ## CI/CD Workflow
 
 This project uses Vercel for deployments with a promotion pipeline and GitHub Actions for CI validation.
@@ -132,4 +134,4 @@ git push origin develop
 - GitHub Actions workflows: `.github/workflows/`
 - Issues with CI/CD: Check workflow runs at https://github.com/Sockshead/life-is-tempo/actions
 - Vercel deployments: https://vercel.com/socksheads-projects/life-is-tempo
-- Need help? Create an issue or ask the team
+- Need help? [Open a GitHub issue](https://github.com/Sockshead/life-is-tempo/issues)
