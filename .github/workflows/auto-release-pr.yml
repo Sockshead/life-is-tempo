@@ -1,0 +1,33 @@
+name: Auto Release PR
+
+on:
+  push:
+    branches: [develop]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  create-release-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create or update release PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Check if an open PR from develop to master already exists
+          EXISTING_PR=$(gh pr list --base master --head develop --state open --json number --jq '.[0].number')
+
+          if [ -z "$EXISTING_PR" ]; then
+            gh pr create \
+              --base master \
+              --head develop \
+              --title "Release: merge develop into master" \
+              --body "Automated PR to merge develop into master for production release."
+            echo "Created new release PR"
+          else
+            echo "Release PR #$EXISTING_PR already exists — push updated it automatically"
+          fi

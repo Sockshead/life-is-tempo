@@ -15,7 +15,7 @@ If you discover a security vulnerability in Life Is Tempo, please report it resp
 ### Where to Report
 
 1. **Preferred**: Use GitHub's private security advisory feature
-   - Navigate to the [Security tab](https://github.com/juancmandev/life-is-tempo/security)
+   - Navigate to the [Security tab](https://github.com/Sockshead/life-is-tempo/security)
    - Click "Report a vulnerability"
    - Fill in the details of the vulnerability
 
@@ -69,11 +69,8 @@ This project implements the following security measures:
 - Automated dependency vulnerability scanning via Dependabot
 
 ### Application Security
-- Input validation and sanitization
-- Email validation for newsletter signups
-- Rate limiting on API routes
-- Double opt-in for newsletter subscriptions
-- Protection against common web vulnerabilities (XSS, CSRF, SQL injection)
+- Input validation and sanitization utilities (`lib/security.ts`)
+- Protection against common web vulnerabilities (XSS, CSRF)
 
 ### Development Security
 - Secrets excluded from version control
@@ -83,14 +80,12 @@ This project implements the following security measures:
 ## Known Security Considerations
 
 ### Third-Party Integrations
-- Google Analytics: Only used for anonymous analytics
-- Newsletter Service: Email addresses stored securely with service provider
-- Affiliate Links: No user data shared with affiliate programs
+- Google Analytics: Optional, anonymous analytics only
 
 ### Data Handling
-- Minimal user data collection (email for newsletter only)
+- No user data collection (static site)
 - No authentication or user accounts
-- No payment processing (affiliate income only)
+- No payment processing
 - No sensitive personal information stored
 
 ## Security Updates
@@ -107,8 +102,8 @@ We appreciate the security research community and will acknowledge responsible d
 ## Contact
 
 For security concerns: `security@lifeistempo.com`
-For general questions: [GitHub Issues](https://github.com/juancmandev/life-is-tempo/issues)
+For general questions: [GitHub Issues](https://github.com/Sockshead/life-is-tempo/issues)
 
 ---
 
-**Last Updated**: 2026-02-11
+**Last Updated**: 2026-02-12

@@ -42,7 +42,7 @@ Before starting development on Life Is Tempo, ensure you have the following inst
 cd A:/repositories  # Or your preferred location
 
 # Clone the repository
-git clone https://github.com/juancmandev/life-is-tempo.git
+git clone https://github.com/Sockshead/life-is-tempo.git
 
 # Enter project directory
 cd life-is-tempo
@@ -153,7 +153,7 @@ life-is-tempo/
 │   └── [locale]/             # Multi-language routes
 │       ├── layout.tsx        # Root layout
 │       └── page.tsx          # Homepage
-├── components/               # React components (empty, to be added)
+├── components/               # 32 React components (Blog, Layout, MDX, Metrics, UI)
 ├── lib/                      # Utilities and helpers
 │   ├── env.ts                # Environment variable validation
 │   └── security.ts           # Security utilities
@@ -720,12 +720,12 @@ After completing this guide:
 - Project CLAUDE.md: Development patterns
 
 **Community**:
-- GitHub Issues: https://github.com/juancmandev/life-is-tempo/issues
-- Discussions: https://github.com/juancmandev/life-is-tempo/discussions
+- GitHub Issues: https://github.com/Sockshead/life-is-tempo/issues
+- Discussions: https://github.com/Sockshead/life-is-tempo/discussions
 
 **Contact**:
 - Email: security@lifeistempo.com (for security issues)
-- GitHub: @juancmandev
+- GitHub: @Sockshead
 
 ---
 

@@ -40,6 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .worktrees/
+storybook-static/
 
 # Claude Code local settings
 .claude/settings.local.json

@@ -372,7 +372,7 @@ export const config = {
 
 ### Manual Locale Selection
 
-**Language Switcher Component** (to be implemented):
+**Language Switcher Component** (implemented in `components/Layout/LanguageSwitcher.tsx`):
 ```typescript
 'use client';
 
@@ -785,5 +785,5 @@ format.number(1999, { style: 'currency', currency: 'USD' });
 **Last Updated**: 2026-02-11
 
 **Need Help?**
-- Project Issues: https://github.com/juancmandev/life-is-tempo/issues
+- Project Issues: https://github.com/Sockshead/life-is-tempo/issues
 - next-intl Discord: https://discord.com/invite/PQdpCr5
