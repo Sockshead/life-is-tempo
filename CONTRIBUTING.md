@@ -90,7 +90,7 @@ gh pr create \
 | Branch | Approvals Required | Status Checks | Direct Push |
 |--------|-------------------|---------------|-------------|
 | `develop` | 1 | validate | Blocked |
-| `master` | 2 | validate | Blocked (PR only) |
+| `master` | 1 | validate | Blocked (PR only) |
 
 ### Emergency Hotfix Process
 
@@ -112,7 +112,7 @@ gh pr create --base master --head hotfix/critical-bug \
   --title "HOTFIX: Critical bug fix" \
   --label hotfix
 
-# 4. Get expedited reviews (still require 2 approvals)
+# 4. Get expedited review (still requires approval)
 # 5. Merge to master (triggers Vercel production deployment)
 
 # 6. Backport to develop

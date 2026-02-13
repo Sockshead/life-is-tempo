@@ -8,8 +8,8 @@ This guide covers manual configuration steps that must be completed via the GitH
 
 Navigate to: **Settings → Branches → Add rule**
 
-#### For `main` branch:
-1. Branch name pattern: `main`
+#### For `master` branch:
+1. Branch name pattern: `master`
 2. Enable these settings:
    - ✅ Require a pull request before merging
      - Required approvals: **1**
