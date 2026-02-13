@@ -23,7 +23,7 @@ Navigate to: **Settings → Branches → Add rule**
 3. Click **Create** or **Save changes**
 
 #### For `develop` branch (if using):
-Repeat the same settings as `main` branch.
+Repeat the same settings as `master` branch.
 
 ### 2. Code Security and Analysis
 
@@ -180,7 +180,7 @@ Under "Dependabot alerts":
 
 After completing the above steps:
 
-- [ ] Branch protection enabled for `main` and `develop`
+- [ ] Branch protection enabled for `master` and `develop`
 - [ ] Dependabot alerts enabled
 - [ ] Secret scanning enabled
 - [ ] Push protection enabled
@@ -195,11 +195,11 @@ After completing the above steps:
 
 After setup, these links will be useful:
 
-- **Security Overview**: `https://github.com/[username]/life-is-tempo/security`
-- **Dependabot Alerts**: `https://github.com/[username]/life-is-tempo/security/dependabot`
-- **Secret Scanning**: `https://github.com/[username]/life-is-tempo/security/secret-scanning`
-- **Actions**: `https://github.com/[username]/life-is-tempo/actions`
-- **Settings**: `https://github.com/[username]/life-is-tempo/settings`
+- **Security Overview**: `https://github.com/Sockshead/life-is-tempo/security`
+- **Dependabot Alerts**: `https://github.com/Sockshead/life-is-tempo/security/dependabot`
+- **Secret Scanning**: `https://github.com/Sockshead/life-is-tempo/security/secret-scanning`
+- **Actions**: `https://github.com/Sockshead/life-is-tempo/actions`
+- **Settings**: `https://github.com/Sockshead/life-is-tempo/settings`
 
 ## 📝 Notes
 
@@ -211,4 +211,4 @@ After setup, these links will be useful:
 ---
 
 **Created**: 2026-02-11
-**Owner**: [@juancmandev](https://github.com/juancmandev)
+**Owner**: [@Sockshead](https://github.com/Sockshead)

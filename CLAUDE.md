@@ -1,29 +1,25 @@
 # Life Is Tempo - Project Documentation
 
-**Last Updated**: 2026-02-11
+**Last Updated**: 2026-02-12
 
 ---
 
 ## Project Overview
 
-**Purpose**: Personal blog and newsletter platform documenting a training journey for Berlin 70.3 (Ironman) from Colombia while immersed in underground techno culture. Chronicles the intersection of endurance sports, techno music, and productivity.
-
-**Target Audience**:
-- Personal documentation and reflection
-- Readers interested in endurance sports training
-- Individuals exploring work-life balance through dual passions
-- Techno culture enthusiasts
+**Purpose**: Production-ready Next.js blog starter and personal platform documenting a training journey for Berlin 70.3 (Ironman) from Colombia while immersed in underground techno culture.
 
 **Technology Stack**:
 - **Framework**: Next.js 16 (App Router)
 - **UI**: React 19, Tailwind CSS 4
-- **Content**: MDX for blog posts
+- **Content**: MDX with gray-matter and next-mdx-remote
 - **Internationalization**: next-intl (English/Spanish)
 - **Type Safety**: TypeScript 5, Zod 4.3.6
+- **Testing**: Jest 30.2.0, Testing Library 16.3.2
+- **Icons**: lucide-react
 - **Environment Validation**: @t3-oss/env-nextjs
 - **Deployment**: Vercel (production)
 
-**Architecture Type**: Frontend-only application with planned external service integrations (no backend APIs).
+**Architecture Type**: Frontend-only application with static site generation for blog posts.
 
 ---
 
@@ -32,29 +28,21 @@
 ### Development Setup
 
 ```bash
-# Clone and install
-git clone https://github.com/juancmandev/life-is-tempo.git
+git clone https://github.com/Sockshead/life-is-tempo.git
 cd life-is-tempo
 pnpm install
-
-# Environment setup (all variables optional for development)
 cp .env.example .env.local
-
-# Run development server
-pnpm dev  # Opens at http://localhost:3000
-
-# Build for production
-pnpm build && pnpm start
+pnpm dev  # http://localhost:3000
 ```
 
 ### Testing
 
 ```bash
-# Run linting
-pnpm lint
-
-# Security audit
-pnpm security-check  # Checks for dependency vulnerabilities
+pnpm test              # Run all 637 tests
+pnpm test:watch        # Watch mode
+pnpm test:coverage     # Coverage report (80% threshold)
+pnpm lint              # ESLint
+pnpm security-check    # Dependency vulnerabilities
 ```
 
 ---
@@ -63,34 +51,27 @@ pnpm security-check  # Checks for dependency vulnerabilities
 
 ### Frontend-Only Design
 
-**No Backend APIs**: All features must use external services or static generation.
+**No Backend APIs**: All features use external services or static generation.
 
 **Current Architecture**:
 - Static site generation (SSG) for blog posts
+- MDX content with frontmatter parsing via gray-matter
 - Client-side interactions only
-- External services for dynamic features (newsletter, analytics)
-
-**Future External Integrations** (planned):
-- Newsletter: Loops.so or Resend API
-- Email service: Resend
-- AI content assistance: OpenAI/Anthropic APIs
-- Analytics: Google Analytics, Vercel Analytics
+- External services for dynamic features (analytics)
 
 ### Multi-Language Routing
 
 **Pattern**: `app/[locale]/page.tsx` structure with next-intl
 
-**Supported Locales**:
-- `en` (English) - default
-- `es` (Spanish)
+**Supported Locales**: `en` (default), `es`
 
 **Routing Structure**:
 ```
-/             → Redirects to /en or /es based on browser locale
-/en           → English homepage
-/es           → Spanish homepage
-/en/about     → English about page
-/es/acerca    → Spanish about page (localized path)
+/             -> Redirects to /en or /es based on browser locale
+/en           -> English homepage
+/es           -> Spanish homepage
+/en/about     -> English about page
+/es/acerca    -> Spanish about page (localized path)
 ```
 
 **Adding Translations**:
@@ -115,29 +96,35 @@ pnpm security-check  # Checks for dependency vulnerabilities
 - Empty strings treated as undefined
 - Optional server/client variable separation
 
-**Rate Limiting** (planned):
-- API routes will implement rate limiting
-- RATE_LIMIT_SECRET environment variable for protection
+**Security Utilities** (`lib/security.ts`):
+- Email validation (RFC 5322)
+- Input sanitization
+- Rate limiting presets (utility functions, not wired to routes)
+- Honeypot validation
+- CORS header generation
 
 ### Content-as-Code (MDX)
 
-**Planned Structure** (not yet implemented):
+**Current Structure**:
 ```
 content/
-├── en/
-│   └── posts/
-│       └── 2026-02-11-first-post.mdx
-└── es/
-    └── posts/
-        └── 2026-02-11-primer-post.mdx
+└── posts/
+    ├── en/
+    │   ├── balancing-sets-and-intervals.mdx
+    │   ├── first-tempo-training-in-bogota.mdx
+    │   └── underground-endurance-warehouse-to-track.mdx
+    └── es/
+        ├── equilibrando-sets-e-intervalos.mdx
+        ├── primer-tempo-entrenamiento-en-bogota.mdx
+        └── resistencia-underground-del-warehouse-a-la-pista.mdx
 ```
 
-**Frontmatter Schema** (to be implemented):
+**Frontmatter Schema**:
 ```yaml
 ---
 title: "Post Title"
 date: "2026-02-11"
-author: "Juan Camilo"
+author: "Ultra Choko"
 category: "training-chronicles" | "dual-life-tactics" | "underground-endurance"
 tags: ["training", "techno", "colombia", "berlin"]
 excerpt: "Brief summary for preview..."
@@ -145,103 +132,104 @@ image: "/images/posts/featured.jpg"
 ---
 ```
 
-**MDX Configuration**: Configured in `next.config.ts` with `@next/mdx`
+---
+
+## Component Architecture
+
+### Directory Structure
+
+```
+components/
+├── Blog/           # 7 components
+│   ├── CategoryFilter.tsx
+│   ├── CategoryPageContent.tsx
+│   ├── FeaturedPost.tsx
+│   ├── PostCard.tsx
+│   ├── ReadingProgress.tsx
+│   ├── RelatedPosts.tsx
+│   └── TableOfContents.tsx
+├── Layout/         # 7 components
+│   ├── Footer.tsx
+│   ├── Header.tsx
+│   ├── LanguageSwitcher.tsx
+│   ├── MobileMenu.tsx
+│   ├── Navigation.tsx
+│   ├── PageLayout.tsx
+│   └── Section.tsx
+├── MDX/            # 8 components
+│   ├── AudioEmbed.tsx
+│   ├── BPMIndicator.tsx
+│   ├── CalloutBox.tsx
+│   ├── ImageGrid.tsx
+│   ├── MDXComponents.tsx
+│   ├── MDXLayout.tsx
+│   ├── MetricBox.tsx
+│   └── StravaEmbed.tsx
+├── Metrics/        # 4 components
+│   ├── BPMCounter.tsx
+│   ├── MetricDisplay.tsx
+│   ├── ProgressBar.tsx
+│   └── StatCard.tsx
+└── UI/             # 6 components
+    ├── Badge.tsx
+    ├── Button.tsx
+    ├── Card.tsx
+    ├── Input.tsx
+    ├── Skeleton.tsx
+    └── Toast.tsx
+```
+
+**Total**: 32 components across 5 categories.
 
 ---
 
 ## Development Workflows
 
-### Local Development
-
-**Starting Development Server**:
-```bash
-cd A:/repositories/life-is-tempo
-pnpm dev  # Runs on http://localhost:3000
-```
-
-**Environment Variables**:
-- **Required**: None for basic development
-- **Optional**: See `.env.example` for complete list
-- **Validation**: Automatic via `lib/env.ts` at build time
-
-**Hot Reload**:
-- Next.js Fast Refresh enabled
-- CSP relaxed in development (strict in production)
-
 ### Code Standards
 
-**TypeScript**:
-- Strict mode enabled
-- No implicit any
-- All environment variables type-safe via Zod
+**TypeScript**: Strict mode, no implicit any, type-safe env vars via Zod.
 
-**Tailwind CSS**:
-- Use Tailwind utility classes (no custom CSS unless necessary)
-- Responsive-first design
-- Dark mode support (to be implemented)
+**Tailwind CSS**: Utility classes, responsive-first, dark mode planned.
 
-**Component Organization** (when components are created):
-```
-components/
-├── layout/         # Header, Footer, Navigation
-├── ui/             # Buttons, Cards, Badges
-├── blog/           # Post cards, categories, tags
-└── forms/          # Newsletter signup, contact
-```
-
-**File Naming Conventions**:
-- Components: PascalCase (e.g., `BlogPost.tsx`)
+**File Naming**:
+- Components: PascalCase (e.g., `PostCard.tsx`)
 - Utilities: camelCase (e.g., `formatDate.ts`)
-- Constants: SCREAMING_SNAKE_CASE (e.g., `API_ENDPOINTS.ts`)
 
 ### Testing Strategy
 
-**Current State**: No tests implemented yet
+**Current State**: 637 tests across 25 test suites.
 
-**Planned Testing**:
-- E2E: Playwright (for critical user flows)
-- Unit: Vitest or Jest (for utilities, components)
-- Integration: Test newsletter signup, form validation
+**Framework**: Jest 30.2.0 + Testing Library 16.3.2
 
-**Coverage Requirements** (when implemented):
-- Features and bug fixes: Require tests
-- Config changes, typos, docs: Tests optional
+**Coverage Threshold**: 80% (branches, functions, lines, statements)
+
+**Test Organization**: `components/{Category}/__tests__/{Component}.test.tsx`
+
+**Tested Categories**: Blog (6 suites), Layout (7 suites), MDX (8 suites), Metrics (4 suites). UI components not yet tested.
 
 ### Git Workflow
 
-**Branch Strategy** (feature → develop → master):
-- `master` - Production branch (auto-deployed to Vercel)
-- `develop` - Staging branch (auto-deployed to Vercel as preview)
-- `feat/*` - Feature branches (PR to develop triggers Vercel preview URL)
-- `fix/*` - Bug fix branches
-- `docs/*` - Documentation changes
+**Branch Strategy** (feature -> develop -> master):
+- `master` - Production (auto-deployed to Vercel)
+- `develop` - Staging (auto-deployed to Vercel as preview)
+- `feat/*`, `fix/*`, `docs/*` - Feature/fix/docs branches
 
-**Commit Convention** (informal):
-- `feat:` - New features
-- `fix:` - Bug fixes
-- `docs:` - Documentation updates
-- `chore:` - Maintenance tasks
-- `security:` - Security improvements
+**Commit Convention**: `feat:`, `fix:`, `docs:`, `chore:`, `security:`
 
 **Before Committing**:
 ```bash
-pnpm lint           # Run ESLint
-pnpm security-check # Check dependency vulnerabilities
+pnpm lint
+pnpm test
+pnpm security-check
 ```
 
 ### Deployment
 
-**Vercel Deployment**:
-1. PRs to `develop` get automatic Vercel preview URLs
-2. Merge to `develop` auto-deploys staging environment
+**Vercel Pipeline**:
+1. PRs to `develop` get automatic preview URLs
+2. Merge to `develop` auto-deploys staging
 3. Merge `develop` to `master` triggers production deployment
-4. Environment variables configured in Vercel dashboard
-5. Production URL: https://lifeistempo.com
-
-**Environment Variables in Vercel**:
-- See `docs/deployment/environment-variables.md` for complete list
-- All variables optional for basic deployment
-- Newsletter/analytics require respective API keys
+4. Production URL: https://lifeistempo.com
 
 ---
 
@@ -249,8 +237,8 @@ pnpm security-check # Check dependency vulnerabilities
 
 ### Abstraction Rules
 
-- **Don't create abstractions until pattern repeats 3+ times**
-- Three similar lines of code is better than premature abstraction
+- Don't create abstractions until pattern repeats 3+ times
+- Three similar lines is better than premature abstraction
 - Prefer standard library over external dependencies when equivalent
 
 ### Code Cleanup Policies
@@ -259,53 +247,47 @@ pnpm security-check # Check dependency vulnerabilities
 - Only add comments where logic isn't self-evident
 - Don't add error handling for impossible scenarios
 - Trust framework guarantees (Next.js, React)
-- Only validate at system boundaries (user input, external APIs)
-
-### Dependency Management
-
-- Use pnpm for package management (defined in `packageManager` field)
-- Keep dependencies minimal and up-to-date
-- Run `pnpm audit` before adding new dependencies
-- Document non-obvious dependency choices
+- Only validate at system boundaries
 
 ### Security Standards
 
 - Never commit secrets to version control (use `.env.local`)
 - Validate all user input at system boundaries
-- Use parameterized queries (if database added)
 - Follow OWASP top 10 best practices
-- Sanitize MDX content (when implemented)
 
 ---
 
 ## Recent Work
 
-### 2026-02-11: Comprehensive Documentation Generation
-- Created project CLAUDE.md with development patterns
-- Generated docs/ folder with architecture and deployment guides
-- Created Mermaid diagrams for system architecture
-- Enhanced README with documentation links
-- **Source**: docs-generation plan
+### 2026-02-12: Documentation Refresh
+- Refreshed all markdown files with accurate project state
+- Updated branding to Ultra Choko
+- Created LICENSE file (MIT)
+- Fixed false claims about empty components and missing tests
+- Updated GitHub URLs from juancmandev to Sockshead
 
-### 2026-02-11: GitHub Security Automation
-- Automated Dependabot, secret scanning, and code scanning setup
-- Verified security features via GitHub API
-- Created comprehensive SECURITY_CHECKLIST.md
-- **Source**: GITHUB_SETUP.md
+### 2026-02-11: Phase 2 Components with Full Test Coverage
+- Implemented 32 components across 5 categories
+- 637 tests across 25 test suites
+- 6 MDX blog posts (3 EN + 3 ES)
+- Jest 30 + Testing Library setup with 80% coverage threshold
 
-### 2026-02-08: Security Hardening Implementation
-- Implemented comprehensive security headers (CSP, HSTS, X-Frame-Options)
-- Added environment variable validation with @t3-oss/env-nextjs
-- Created SECURITY.md with vulnerability reporting process
-- Set up automated dependency scanning
-- **Source**: SECURITY_CHECKLIST.md
+### 2026-02-11: CI/CD Migration to Vercel
+- Migrated from GitHub Pages to Vercel
+- Automatic deployments: develop (staging), master (production)
+- Preview deployments per PR
+
+### 2026-02-08: Security Hardening
+- Comprehensive security headers (CSP, HSTS, X-Frame-Options)
+- Environment variable validation with @t3-oss/env-nextjs
+- Security utilities in lib/security.ts
+- Automated dependency scanning via Dependabot
 
 ### 2026-02-06: Initial Platform Setup
-- Next.js 16 project initialization with App Router
-- Multi-language support with next-intl (English/Spanish)
+- Next.js 16 with App Router
+- Multi-language support with next-intl
 - Tailwind CSS 4 configuration
-- MDX integration for blog content
-- Basic project structure and routing
+- MDX integration
 
 ---
 
@@ -313,93 +295,50 @@ pnpm security-check # Check dependency vulnerabilities
 
 ### Architecture Constraints
 
-**No Backend APIs**:
-- All dynamic features require external services
-- Newsletter requires Loops.so or Resend integration
-- AI content features need OpenAI/Anthropic API keys
-- Cannot implement server-side authentication without adding backend
-
-### Empty Directories
-
-**Components Directory**:
-- `components/` directory is currently empty
-- All UI currently in page components (`app/[locale]/page.tsx`)
-- Extract reusable components as patterns emerge (3+ uses)
-
-**Content Directory**:
-- `content/` directory structure planned but not created
-- MDX blog posts not yet implemented
-- First post creation will establish directory structure
-
-### External Service Dependencies
-
-**Newsletter Integration**:
-- Requires external service (Loops.so recommended)
-- Environment variables: `NEWSLETTER_API_KEY`, `NEWSLETTER_AUDIENCE_ID`
-- Double opt-in pattern recommended for GDPR compliance
-
-**Analytics**:
-- Google Analytics: `NEXT_PUBLIC_GA_MEASUREMENT_ID`
-- Vercel Analytics: `NEXT_PUBLIC_VERCEL_ANALYTICS_ID`
-- Both optional, no impact on core functionality
+**No Backend APIs**: All dynamic features require external services. Rate limiting utilities exist in `lib/security.ts` but are not wired to any routes (no API routes exist).
 
 ### Development Environment
 
-**CSP in Development**:
-- Content Security Policy disabled in development mode
-- Enables Next.js hot reload without CSP violations
-- Strict CSP enforced in production builds
+**CSP in Development**: Disabled in development mode for Next.js hot reload. Strict CSP enforced in production.
 
-**Environment Variables**:
-- All variables optional for development
-- Missing variables don't break local development
-- Validation only fails on production build if required variables missing
+**Environment Variables**: All optional for development. Validation only strict on production build.
 
 ### Internationalization
 
-**Locale Path Mapping**:
-- English uses `/about`, Spanish uses `/acerca`
-- Path mappings defined in `i18n/routing.ts`
-- Add new path mappings when creating locale-specific routes
+**Locale Path Mapping**: English uses `/about`, Spanish uses `/acerca`. Defined in `i18n/routing.ts`.
 
-**Translation Keys**:
-- Nested structure: `homepage.hero.title`
-- Keep keys consistent across `messages/en.json` and `messages/es.json`
-- Missing translations show error in development (safe in production)
+**Translation Keys**: Nested structure (`homepage.hero.title`). Keep consistent across `messages/en.json` and `messages/es.json`.
+
+### Test Coverage Gap
+
+**UI Components**: The 6 UI components (Badge, Button, Card, Input, Skeleton, Toast) do not have tests yet. All other 26 components have comprehensive test coverage.
 
 ---
 
 ## Reference Documentation
 
-### Internal Documentation
+### Internal
 - Architecture: `docs/architecture/system-overview.md`
+- Security: `SECURITY.md`, `SECURITY_CHECKLIST.md`
 - Deployment: `docs/deployment/vercel-deployment.md`
 - Development: `docs/development/getting-started.md`
-- Security: `SECURITY.md`, `SECURITY_CHECKLIST.md`
-- Setup: `GITHUB_SETUP.md`
+- Components: `docs/components/README.md`
 
-### External Resources
-- Next.js Docs: https://nextjs.org/docs
-- next-intl Docs: https://next-intl-docs.vercel.app
+### External
+- Next.js: https://nextjs.org/docs
+- next-intl: https://next-intl-docs.vercel.app
 - Tailwind CSS: https://tailwindcss.com/docs
 - MDX: https://mdxjs.com
-- Vercel Deployment: https://vercel.com/docs
-
----
-
-## Planning Files
-
-Active plans stored in `A:/planning/` with naming convention `{project}-{topic}-{YYYYMMDD}.md`:
-- `frontend-docs-generation-20260211.md` - Documentation generation plan
+- Vercel: https://vercel.com/docs
 
 ---
 
 ## Contact & Support
 
-- **Repository**: https://github.com/juancmandev/life-is-tempo
+- **Repository**: https://github.com/Sockshead/life-is-tempo
 - **Website**: https://lifeistempo.com
 - **Security**: security@lifeistempo.com
-- **Author**: Juan Carlos Martínez (@juancmandev)
+- **Maintainer**: Ultra Choko (@Sockshead)
 
 ---
 

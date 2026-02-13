@@ -426,7 +426,7 @@ OPENAI_API_KEY=sk-proj-prod-...
 ANTHROPIC_API_KEY=sk-ant-prod-...
 
 # Affiliate
-AMAZON_ASSOCIATE_ID=juancmandev-20
+AMAZON_ASSOCIATE_ID=Sockshead-20
 AFFILIATE_TRACKING_SECRET=<generate-secure-random-string>
 
 # Analytics
@@ -667,4 +667,4 @@ NEWSLETTER_API_KEY=actual_api_key_value
 **Need Help?**
 - @t3-oss/env-nextjs docs: https://env.t3.gg
 - Vercel environment variables: https://vercel.com/docs/environment-variables
-- Project issues: https://github.com/juancmandev/life-is-tempo/issues
+- Project issues: https://github.com/Sockshead/life-is-tempo/issues
