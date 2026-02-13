@@ -8,8 +8,8 @@ This guide covers manual configuration steps that must be completed via the GitH
 
 Navigate to: **Settings → Branches → Add rule**
 
-#### For `main` branch:
-1. Branch name pattern: `main`
+#### For `master` branch:
+1. Branch name pattern: `master`
 2. Enable these settings:
    - ✅ Require a pull request before merging
      - Required approvals: **1**
@@ -57,15 +57,9 @@ Navigate to: **Settings → Actions → General**
 
 This allows Dependabot and other automated tools to create PRs.
 
-### 4. Pages (Optional - for documentation)
+### 4. Pages
 
-If you want to host documentation via GitHub Pages:
-
-Navigate to: **Settings → Pages**
-
-1. Source: **Deploy from a branch**
-2. Branch: **gh-pages** (or create a docs branch)
-3. Click **Save**
+GitHub Pages is **not used** for site deployment. The site is deployed via Vercel (auto-deploys on push to `master` and `develop`). No Pages configuration is needed.
 
 ## 🔑 Secrets Configuration
 

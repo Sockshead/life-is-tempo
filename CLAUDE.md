@@ -217,9 +217,10 @@ pnpm build-storybook   # Static build
 
 ### Git Workflow
 
-**Branch Strategy**:
-- `master` - Production branch (deployed to Vercel)
-- `feat/*` - Feature branches
+**Branch Strategy** (feature → develop → master):
+- `master` - Production branch (auto-deployed to Vercel)
+- `develop` - Staging branch (auto-deployed to Vercel as preview)
+- `feat/*` - Feature branches (PR to develop triggers Vercel preview URL)
 - `fix/*` - Bug fix branches
 - `docs/*` - Documentation changes
 
@@ -239,10 +240,11 @@ pnpm security-check # Check dependency vulnerabilities
 ### Deployment
 
 **Vercel Deployment**:
-1. Push to `master` branch triggers automatic deployment
-2. Environment variables configured in Vercel dashboard
-3. Preview deployments created for pull requests
-4. Production URL: https://lifeistempo.com
+1. PRs to `develop` get automatic Vercel preview URLs
+2. Merge to `develop` auto-deploys staging environment
+3. Merge `develop` to `master` triggers production deployment
+4. Environment variables configured in Vercel dashboard
+5. Production URL: https://lifeistempo.com
 
 **Environment Variables in Vercel**:
 - See `docs/deployment/environment-variables.md` for complete list

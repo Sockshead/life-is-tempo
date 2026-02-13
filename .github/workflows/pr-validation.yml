@@ -2,7 +2,7 @@ name: PR Validation
 
 on:
   pull_request:
-    branches: [master, develop, test]
+    branches: [master, develop]
 
 permissions:
   contents: read
@@ -44,7 +44,7 @@ jobs:
         run: pnpm audit --prod --audit-level=high
         continue-on-error: true
 
-      - name: Build static site
+      - name: Build project
         id: build
         run: pnpm build
         env:
@@ -76,10 +76,10 @@ jobs:
               `- Build: ${buildStatus === 'success' ? '✅ Passed' : '❌ Failed'}\n\n`;
 
             if (targetBranch === 'master') {
-              message += `⚠️ **Production PR** - This will deploy to production when merged. Ensure:\n` +
+              message += `⚠️ **Production PR** - This will deploy to production via Vercel when merged. Ensure:\n` +
                         `- All tests pass\n` +
-                        `- Staging has been validated\n` +
-                        `- At least 2 reviewers approved\n\n`;
+                        `- Preview deployment has been reviewed\n` +
+                        `- Develop branch is stable\n\n`;
             }
 
             if (!allPassed) {

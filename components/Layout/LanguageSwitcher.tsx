@@ -18,7 +18,9 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
 
   function handleLocaleChange(newLocale: string) {
     if (newLocale === currentLocale) return
-    router.replace(pathname, { locale: newLocale as 'en' | 'es' })
+    // Cast needed because usePathname() returns the dynamic route pattern type
+    // (e.g. '/blog/[slug]'), but at runtime it's always a concrete path
+    router.replace(pathname as '/', { locale: newLocale as 'en' | 'es' })
   }
 
   return (
