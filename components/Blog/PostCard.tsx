@@ -6,17 +6,12 @@ import { Card } from '@/components/UI/Card'
 import { Badge, categoryBadgeVariant } from '@/components/UI/Badge'
 import type { Post } from '@/lib/blog-utils'
 import { formatDate } from '@/lib/blog-utils'
+import { coverGradients } from './constants'
 
 export interface PostCardProps {
   post: Post
   variant?: 'default' | 'featured' | 'compact'
   className?: string
-}
-
-const coverGradients: Record<string, string> = {
-  training: 'from-brand-purple/30 to-gray-900',
-  'dual-life': 'from-brand-blue/30 to-gray-900',
-  underground: 'from-brand-cyan/30 to-gray-900',
 }
 
 /**
@@ -56,7 +51,7 @@ export function PostCard({ post, variant = 'default', className }: PostCardProps
             {post.excerpt}
           </p>
 
-          <div className="flex items-center gap-3 mt-3 font-mono text-xs text-gray-600">
+          <div className="flex items-center gap-3 mt-3 font-mono text-xs text-gray-400">
             {post.readTime && (
               <span>{post.readTime} min read</span>
             )}
@@ -118,7 +113,7 @@ export function PostCard({ post, variant = 'default', className }: PostCardProps
             {post.excerpt}
           </p>
 
-          <div className="flex items-center gap-4 mt-4 font-mono text-xs text-gray-600">
+          <div className="flex items-center gap-4 mt-4 font-mono text-xs text-gray-400">
             {post.readTime && (
               <span>{post.readTime} min read</span>
             )}

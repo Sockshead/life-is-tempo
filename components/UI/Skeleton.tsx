@@ -58,21 +58,3 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
 )
 
 Skeleton.displayName = 'Skeleton'
-
-// Add shimmer keyframe to globals.css via inline style
-// This is a temporary solution - ideally should be in globals.css
-if (typeof document !== 'undefined') {
-  const styleId = 'skeleton-shimmer-styles'
-  if (!document.getElementById(styleId)) {
-    const style = document.createElement('style')
-    style.id = styleId
-    style.textContent = `
-      @keyframes shimmer {
-        100% {
-          transform: translateX(100%);
-        }
-      }
-    `
-    document.head.appendChild(style)
-  }
-}

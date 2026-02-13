@@ -197,15 +197,28 @@ components/
 
 ### Testing Strategy
 
-**Current State**: 637 tests across 25 test suites.
-
-**Framework**: Jest 30.2.0 + Testing Library 16.3.2
+**Current State**: 25 test suites, 637 tests (Jest 30.2.0 + Testing Library 16.3.2)
 
 **Coverage Threshold**: 80% (branches, functions, lines, statements)
 
 **Test Organization**: `components/{Category}/__tests__/{Component}.test.tsx`
 
-**Tested Categories**: Blog (6 suites), Layout (7 suites), MDX (8 suites), Metrics (4 suites). UI components not yet tested.
+**Test Commands**:
+```bash
+pnpm test              # Run all tests
+pnpm test:watch        # Watch mode
+pnpm test:coverage     # Coverage report
+```
+
+**Storybook** (interactive component docs):
+```bash
+pnpm storybook         # Dev server at localhost:6006
+pnpm build-storybook   # Static build
+```
+
+**Coverage Requirements**:
+- Features and bug fixes: Require tests
+- Config changes, typos, docs: Tests optional
 
 ### Git Workflow
 
@@ -265,6 +278,25 @@ pnpm security-check
 - Created LICENSE file (MIT)
 - Fixed false claims about empty components and missing tests
 - Updated GitHub URLs from juancmandev to Sockshead
+
+### 2026-02-12: Storybook 10 + MCP Setup & Code Audit
+- Added Storybook 10 with @storybook/nextjs-vite framework
+- Installed @storybook/addon-mcp for AI agent integration
+- Created 29 stories across all component categories (UI, Layout, Blog, Metrics, MDX)
+- Fixed broken CSS variables (var(--dark/--purple/--cyan) → var(--color-brand-*))
+- Fixed basePath defaulting to `/life-is-tempo` instead of empty (Vercel deployment)
+- Added error boundary for blog post pages
+- Fixed WCAG contrast: text-gray-600 → text-gray-500 for metadata text
+- Extracted duplicated coverGradients to shared constants
+- Moved shimmer keyframe from inline style injection to globals.css
+- **Source**: storybook-and-audit plan
+
+### 2026-02-11: Comprehensive Documentation Generation
+- Created project CLAUDE.md with development patterns
+- Generated docs/ folder with architecture and deployment guides
+- Created Mermaid diagrams for system architecture
+- Enhanced README with documentation links
+- **Source**: docs-generation plan
 
 ### 2026-02-11: Phase 2 Components with Full Test Coverage
 - Implemented 32 components across 5 categories
