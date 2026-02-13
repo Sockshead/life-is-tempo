@@ -64,23 +64,16 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const getBasePath = () => {
-  // In development, use no basePath for local testing
-  // In production (GitHub Pages), use /life-is-tempo
-  if (process.env.NEXT_PUBLIC_BASE_PATH !== undefined) {
-    return process.env.NEXT_PUBLIC_BASE_PATH;
-  }
-  return process.env.NODE_ENV === "production" ? "/life-is-tempo" : "";
-};
-
 const nextConfig: NextConfig = {
-  // Enable static HTML export only in production (GitHub Pages)
-  // Dev mode needs server for middleware to work (i18n routing)
-  output: process.env.NODE_ENV === "production" ? "export" : undefined,
-  basePath: getBasePath(), // Dynamic basePath based on environment
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  // Note: headers() is not supported with static export
-  // Security headers should be configured at the hosting level (e.g., GitHub Pages custom domain)
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: securityHeaders,
+      },
+    ];
+  },
 };
 
 const withMDX = createMDX({
