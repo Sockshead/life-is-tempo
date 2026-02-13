@@ -17,6 +17,11 @@ export const routing = defineRouting({
       en: '/about',
       es: '/acerca',
     },
+    '/blog': '/blog',
+    '/blog/[slug]': '/blog/[slug]',
+    '/training': '/training',
+    '/dual-life': '/dual-life',
+    '/underground': '/underground',
   },
 });
 

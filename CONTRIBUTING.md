@@ -2,18 +2,22 @@
 
 ## CI/CD Workflow
 
-This project uses a promotion pipeline with validation gates at each stage.
+This project uses Vercel for deployments with a promotion pipeline and GitHub Actions for CI validation.
 
 ### Branch Strategy
 
 ```
 Feature Branch (feature/*)
-    ↓ merge
-Test Branch (test) → Deploy to /test
-    ↓ PR + approval
-Develop Branch (develop) → Deploy to /staging
-    ↓ PR + 2 approvals
-Master Branch (master) → Deploy to Production (/)
+    ↓ Create PR to develop (triggers Vercel preview deployment)
+    ↓ Review preview URL, validate tests pass & site works
+    ↓ Merge PR to develop
+Develop Branch (develop)
+    ↓ Vercel auto-deploys (staging environment)
+    ↓ Manual confirmation that deploy is stable
+    ↓ Create PR from develop → master
+Master Branch (master)
+    ↓ Merge triggers Vercel production deployment
+    → Production live
 ```
 
 ### Development Workflow
@@ -35,28 +39,11 @@ git add .
 git commit -m "feat: add new feature"
 ```
 
-#### 2. Test Environment Validation
+#### 2. Create PR to Develop
 
-Merge your feature to the `test` branch for validation:
-
-```bash
-git checkout test
-git pull origin test
-git merge feature/my-feature
-git push origin test
-```
-
-Wait for deployment to complete, then verify:
-- Test URL: https://sockshead.github.io/life-is-tempo/test
-- Check all functionality works
-- Verify no console errors
-
-#### 3. Create PR to Develop (Staging)
-
-Once test environment is validated, create a PR:
+Push your feature branch and create a PR targeting `develop`:
 
 ```bash
-git checkout feature/my-feature
 git push origin feature/my-feature
 
 gh pr create \
@@ -67,12 +54,18 @@ gh pr create \
 ```
 
 **What happens:**
+- Vercel creates an automatic preview deployment with a unique URL
 - GitHub Actions runs validation checks (lint, test, security, build)
-- Staging environment deploys: https://sockshead.github.io/life-is-tempo/staging
-- Bot comments on PR with deployment URL and check status
-- Requires 1 approval before merge
+- Bot comments on PR with check status
+- Review the Vercel preview URL to validate your changes
+- Requires approval before merge
 
-**Review staging preview and merge when approved.**
+#### 3. Staging Validation (Develop Branch)
+
+Once merged to `develop`, Vercel auto-deploys to the staging environment.
+
+- Verify the staging deployment is stable
+- Confirm no regressions from merged features
 
 #### 4. Production Deployment (Develop → Master)
 
@@ -88,18 +81,16 @@ gh pr create \
 
 **What happens:**
 - GitHub Actions runs full validation
-- Requires 2 approvals (not 1)
 - All status checks must pass
-- When merged, production deploys automatically
-- Production URL: https://sockshead.github.io/life-is-tempo
+- When merged, Vercel triggers production deployment automatically
+- Production URL: https://lifeistempo.com
 
 ### Branch Protection Rules
 
 | Branch | Approvals Required | Status Checks | Direct Push |
 |--------|-------------------|---------------|-------------|
-| `test` | 1 | validate | ❌ Blocked |
-| `develop` | 1 | validate, build-and-deploy | ❌ Blocked |
-| `master` | 2 | validate | ❌ Blocked (PR only) |
+| `develop` | 1 | validate | Blocked |
+| `master` | 1 | validate | Blocked (PR only) |
 
 ### Emergency Hotfix Process
 
@@ -121,8 +112,8 @@ gh pr create --base master --head hotfix/critical-bug \
   --title "HOTFIX: Critical bug fix" \
   --label hotfix
 
-# 4. Get expedited reviews (still require 2 approvals)
-# 5. Merge to master (triggers production deployment)
+# 4. Get expedited review (still requires approval)
+# 5. Merge to master (triggers Vercel production deployment)
 
 # 6. Backport to develop
 git checkout develop
@@ -132,12 +123,13 @@ git push origin develop
 
 ### Environment URLs
 
-- **Production**: https://sockshead.github.io/life-is-tempo (master branch)
-- **Staging**: https://sockshead.github.io/life-is-tempo/staging (develop branch)
-- **Test**: https://sockshead.github.io/life-is-tempo/test (test branch)
+- **Production**: https://lifeistempo.com (master branch, auto-deployed via Vercel)
+- **Staging**: develop branch (auto-deployed via Vercel)
+- **Preview**: Automatic per-PR preview deployments on Vercel
 
 ### Questions?
 
 - GitHub Actions workflows: `.github/workflows/`
 - Issues with CI/CD: Check workflow runs at https://github.com/Sockshead/life-is-tempo/actions
+- Vercel deployments: https://vercel.com/socksheads-projects/life-is-tempo
 - Need help? Create an issue or ask the team

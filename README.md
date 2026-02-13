@@ -54,15 +54,15 @@ pnpm dev
 This project uses a promotion pipeline for deployments:
 
 ```
-Feature → Test → Develop (Staging) → Master (Production)
+Feature → PR to Develop (preview) → Develop (staging) → Master (Production)
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed workflow documentation.
 
 **Environment URLs:**
-- Production: https://sockshead.github.io/life-is-tempo
-- Staging: https://sockshead.github.io/life-is-tempo/staging
-- Test: https://sockshead.github.io/life-is-tempo/test
+- Production: https://lifeistempo.com (master, auto-deployed via Vercel)
+- Staging: develop branch (auto-deployed via Vercel)
+- Preview: Automatic per-PR preview deployments on Vercel
 
 Open [http://localhost:3000](http://localhost:3000) to see the application.
 
@@ -105,8 +105,7 @@ Comprehensive documentation available in [`/docs`](./docs):
 - **[Architecture Diagrams](./docs/architecture/diagrams.md)** - Mermaid diagrams (routing, security, deployment)
 
 ### Deployment
-- **[GitHub Pages Deployment](./docs/deployment/github-pages-deployment.md)** - Multi-environment deployment strategy
-- **[Vercel Deployment Guide](./docs/deployment/vercel-deployment.md)** - Alternative deployment process
+- **[Vercel Deployment Guide](./docs/deployment/vercel-deployment.md)** - Deployment strategy and configuration
 - **[Environment Variables](./docs/deployment/environment-variables.md)** - Complete variable reference
 
 ### Development

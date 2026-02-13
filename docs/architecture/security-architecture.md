@@ -59,6 +59,7 @@ const ContentSecurityPolicy = `
   font-src 'self' fonts.gstatic.com;
   img-src 'self' data: blob: *.googletagmanager.com *.google-analytics.com;
   connect-src 'self' *.googletagmanager.com *.google-analytics.com *.vercel-insights.com;
+  frame-src 'self' www.strava.com open.spotify.com w.soundcloud.com;
   frame-ancestors 'self';
   base-uri 'self';
   form-action 'self';
@@ -75,6 +76,7 @@ const ContentSecurityPolicy = `
 | `font-src` | 'self', Google Fonts | Web font loading |
 | `img-src` | 'self', data:, blob:, analytics domains | Images, data URLs, analytics pixels |
 | `connect-src` | 'self', analytics domains | API calls, analytics tracking |
+| `frame-src` | 'self', Strava, Spotify, SoundCloud | Allow embedding training/music widgets |
 | `frame-ancestors` | 'self' | Prevent embedding in iframes (clickjacking) |
 | `base-uri` | 'self' | Prevent base tag injection |
 | `form-action` | 'self' | Forms can only submit to same origin |
