@@ -1,7 +1,6 @@
 'use client'
 
 export default function BlogPostError({
-  error,
   reset,
 }: {
   error: Error & { digest?: string }
@@ -14,7 +13,7 @@ export default function BlogPostError({
           Something went wrong
         </h2>
         <p className="font-mono text-sm text-gray-400 mb-6">
-          {error.message || 'Failed to load this blog post. It may have been removed or contain a formatting error.'}
+          Failed to load this blog post. It may have been removed or contain a formatting error.
         </p>
         <button
           onClick={reset}

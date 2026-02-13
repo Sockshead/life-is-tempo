@@ -70,7 +70,7 @@ Fonts are loaded via Google Fonts in `.storybook/preview-head.html`:
 
 CSS variables are set in `:root` to match the app's `next/font` configuration.
 
-Global styles (`app/globals.css`) are imported in `.storybook/preview.ts`.
+Global styles (`app/globals.css`) are imported in `.storybook/preview.tsx`.
 
 ---
 
@@ -85,7 +85,8 @@ The `@storybook/addon-mcp` addon runs an MCP server within Storybook, enabling A
 Shared mock data for Blog stories is in `.storybook/mock-data.ts`:
 
 ```tsx
-import { mockPost, mockPosts } from '../../.storybook/mock-data'
+// Path is relative to story file location
+import { mockPost, mockPosts } from '../../../.storybook/mock-data'
 ```
 
 ---

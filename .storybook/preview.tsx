@@ -16,9 +16,6 @@ const preview: Preview = {
         { name: 'light', value: '#ffffff' },
       ],
     },
-    a11y: {
-      test: 'todo',
-    },
   },
   decorators: [
     (Story) => (

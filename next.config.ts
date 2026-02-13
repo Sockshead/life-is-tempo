@@ -4,65 +4,6 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 
-/**
- * Content Security Policy
- * Defines trusted sources for content loaded by the application
- */
-const ContentSecurityPolicy = `
-  default-src 'self';
-  script-src 'self' *.googletagmanager.com;
-  style-src 'self' 'unsafe-inline' fonts.googleapis.com;
-  font-src 'self' fonts.gstatic.com;
-  img-src 'self' data: blob: *.googletagmanager.com *.google-analytics.com;
-  connect-src 'self' *.googletagmanager.com *.google-analytics.com *.vercel-insights.com;
-  frame-ancestors 'self';
-  base-uri 'self';
-  form-action 'self';
-`;
-
-/**
- * Security headers configuration
- * Applied to all routes in the application
- */
-const securityHeaders = [
-  {
-    key: "X-DNS-Prefetch-Control",
-    value: "on",
-  },
-  {
-    key: "Strict-Transport-Security",
-    value: "max-age=63072000; includeSubDomains; preload",
-  },
-  {
-    key: "X-Frame-Options",
-    value: "SAMEORIGIN",
-  },
-  {
-    key: "X-Content-Type-Options",
-    value: "nosniff",
-  },
-  {
-    key: "X-XSS-Protection",
-    value: "1; mode=block",
-  },
-  {
-    key: "Referrer-Policy",
-    value: "origin-when-cross-origin",
-  },
-  {
-    key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=()",
-  },
-];
-
-// Add CSP in production only (development needs relaxed CSP for hot reload)
-if (process.env.NODE_ENV === "production") {
-  securityHeaders.push({
-    key: "Content-Security-Policy",
-    value: ContentSecurityPolicy.replace(/\s{2,}/g, " ").trim(),
-  });
-}
-
 const getBasePath = () => {
   if (process.env.NEXT_PUBLIC_BASE_PATH !== undefined) {
     return process.env.NEXT_PUBLIC_BASE_PATH;

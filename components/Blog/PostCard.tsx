@@ -51,7 +51,7 @@ export function PostCard({ post, variant = 'default', className }: PostCardProps
             {post.excerpt}
           </p>
 
-          <div className="flex items-center gap-3 mt-3 font-mono text-xs text-gray-500">
+          <div className="flex items-center gap-3 mt-3 font-mono text-xs text-gray-400">
             {post.readTime && (
               <span>{post.readTime} min read</span>
             )}
@@ -113,7 +113,7 @@ export function PostCard({ post, variant = 'default', className }: PostCardProps
             {post.excerpt}
           </p>
 
-          <div className="flex items-center gap-4 mt-4 font-mono text-xs text-gray-500">
+          <div className="flex items-center gap-4 mt-4 font-mono text-xs text-gray-400">
             {post.readTime && (
               <span>{post.readTime} min read</span>
             )}
