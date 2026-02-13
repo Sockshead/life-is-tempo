@@ -196,14 +196,22 @@ components/
 
 ### Testing Strategy
 
-**Current State**: No tests implemented yet
+**Current State**: 25 test suites, 469 tests (Jest + Testing Library)
 
-**Planned Testing**:
-- E2E: Playwright (for critical user flows)
-- Unit: Vitest or Jest (for utilities, components)
-- Integration: Test newsletter signup, form validation
+**Test Commands**:
+```bash
+pnpm test              # Run all tests
+pnpm test:watch        # Watch mode
+pnpm test:coverage     # Coverage report
+```
 
-**Coverage Requirements** (when implemented):
+**Storybook** (interactive component docs):
+```bash
+pnpm storybook         # Dev server at localhost:6006
+pnpm build-storybook   # Static build
+```
+
+**Coverage Requirements**:
 - Features and bug fixes: Require tests
 - Config changes, typos, docs: Tests optional
 
@@ -278,6 +286,19 @@ pnpm security-check # Check dependency vulnerabilities
 
 ## Recent Work
 
+### 2026-02-12: Storybook 10 + MCP Setup & Code Audit
+- Added Storybook 10 with @storybook/nextjs-vite framework
+- Installed @storybook/addon-mcp for AI agent integration
+- Created 29 stories across all component categories (UI, Layout, Blog, Metrics, MDX)
+- Fixed broken CSS variables (var(--dark/--purple/--cyan) → var(--color-brand-*))
+- Fixed basePath defaulting to `/life-is-tempo` instead of empty (Vercel deployment)
+- Added error boundary for blog post pages
+- Fixed WCAG contrast: text-gray-600 → text-gray-500 for metadata text
+- Extracted duplicated coverGradients to shared constants
+- Moved shimmer keyframe from inline style injection to globals.css
+- Rewrote docs/components/README.md (was entirely outdated)
+- **Source**: storybook-and-audit plan
+
 ### 2026-02-11: Comprehensive Documentation Generation
 - Created project CLAUDE.md with development patterns
 - Generated docs/ folder with architecture and deployment guides
@@ -318,11 +339,6 @@ pnpm security-check # Check dependency vulnerabilities
 - Cannot implement server-side authentication without adding backend
 
 ### Empty Directories
-
-**Components Directory**:
-- `components/` directory is currently empty
-- All UI currently in page components (`app/[locale]/page.tsx`)
-- Extract reusable components as patterns emerge (3+ uses)
 
 **Content Directory**:
 - `content/` directory structure planned but not created
