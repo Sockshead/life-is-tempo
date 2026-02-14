@@ -1,0 +1,104 @@
+{
+  "categories": {
+    "athletes": {
+      "description": "Endurance athletes, Ironman training, race reports",
+      "accounts": [
+        {
+          "handle": "@ironman703",
+          "platform": "instagram",
+          "focus": "Ironman race coverage, athlete stories",
+          "engagement_tier": "high"
+        },
+        {
+          "handle": "@berlinrunners",
+          "platform": "instagram",
+          "focus": "Berlin running community, local events",
+          "engagement_tier": "medium"
+        },
+        {
+          "handle": "@triathlon_motivation",
+          "platform": "threads",
+          "focus": "Daily motivation, training tips",
+          "engagement_tier": "high"
+        }
+      ]
+    },
+    "techno_culture": {
+      "description": "Techno music, club culture, Berlin underground",
+      "accounts": [
+        {
+          "handle": "@berghain",
+          "platform": "instagram",
+          "focus": "Club events, DJ lineups, culture",
+          "engagement_tier": "very_high"
+        },
+        {
+          "handle": "@residentadvisor",
+          "platform": "instagram",
+          "focus": "Techno news, event listings, artist profiles",
+          "engagement_tier": "high"
+        },
+        {
+          "handle": "@djsets",
+          "platform": "twitter",
+          "focus": "Live DJ sets, streaming events",
+          "engagement_tier": "medium"
+        }
+      ]
+    },
+    "dual_life": {
+      "description": "Balancing professional work with athletic pursuits",
+      "accounts": [
+        {
+          "handle": "@productivity_athletes",
+          "platform": "twitter",
+          "focus": "Time management for athlete-professionals",
+          "engagement_tier": "medium"
+        },
+        {
+          "handle": "@corporateathlete",
+          "platform": "instagram",
+          "focus": "Corporate job + endurance training stories",
+          "engagement_tier": "medium"
+        }
+      ]
+    },
+    "agency_work": {
+      "description": "Design, tech startups, development tools",
+      "accounts": [
+        {
+          "handle": "@designinspo",
+          "platform": "instagram",
+          "focus": "UI/UX design inspiration, trends",
+          "engagement_tier": "high"
+        },
+        {
+          "handle": "@techstartups",
+          "platform": "twitter",
+          "focus": "Startup news, funding, product launches",
+          "engagement_tier": "high"
+        },
+        {
+          "handle": "@devtoolkit",
+          "platform": "threads",
+          "focus": "Developer tools, productivity hacks",
+          "engagement_tier": "medium"
+        }
+      ]
+    }
+  },
+  "hashtags_to_monitor": {
+    "training": ["#ironmantraining", "#triathlon", "#enduranceathlete"],
+    "music": ["#techno", "#berlinclubs", "#undergroundmusic"],
+    "lifestyle": ["#duallife", "#athletelife", "#worklifebalance"],
+    "tech": ["#webdev", "#saas", "#indiehacker"]
+  },
+  "content_formats": [
+    "carousel",
+    "reel",
+    "thread",
+    "long_form_post",
+    "image_series",
+    "video_tutorial"
+  ]
+}

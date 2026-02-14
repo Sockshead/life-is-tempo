@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "type-check": "tsc --noEmit",
     "security-check": "pnpm audit --audit-level=high",
     "test": "jest",
     "test:watch": "jest --watch",
