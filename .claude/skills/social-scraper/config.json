@@ -1,0 +1,25 @@
+{
+  "own_accounts": {
+    "threads": "@ultra.choko",
+    "twitter": "@ultrachoko",
+    "instagram": "ultra.choko",
+    "tiktok": "ultrachoko"
+  },
+  "inspiration_sources": {
+    "athletes": ["@ironman703", "@berlinrunners", "@triathlon_motivation"],
+    "techno_culture": ["@berghain", "@djsets", "@residentadvisor"],
+    "dual_life": ["@productivity_athletes", "@corporateathlete"],
+    "agency_work": ["@designinspo", "@techstartups", "@devtoolkit"]
+  },
+  "output": {
+    "inspiration_dir": "content/inspiration",
+    "analytics_dir": "content/analytics"
+  },
+  "scraping": {
+    "default_days": 7,
+    "delay_between_requests_ms": 3000,
+    "max_posts_per_account": 20,
+    "retry_attempts": 3,
+    "timeout_ms": 30000
+  }
+}
