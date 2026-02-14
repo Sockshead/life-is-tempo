@@ -29,12 +29,8 @@ function Write-Log {
 }
 
 # Error handling
-$ErrorActionPreference = "Continue"
-trap {
-    Write-Log "ERROR: $_" -Level "ERROR"
-    Write-Log "Stack trace: $($_.ScriptStackTrace)" -Level "ERROR"
-    continue
-}
+$ErrorActionPreference = "Stop"
+$script:HasErrors = $false
 
 # Start pipeline
 Write-Log "=== Daily Content Pipeline Started ==="
@@ -46,17 +42,22 @@ if (-not $SkipScraping) {
 
     try {
         # Run social-scraper skill via Claude CLI
-        $ScraperOutput = & claude --headless -p "/social-scraper" 2>&1
+        $ScraperOutput = & claude -p "/social-scraper" 2>&1
 
-        if ($LASTEXITCODE -eq 0) {
-            Write-Log "✓ Social scraping completed successfully"
-            Write-Log "Output preview: $($ScraperOutput | Select-Object -First 5)"
-        } else {
-            Write-Log "✗ Social scraping failed with exit code $LASTEXITCODE" -Level "ERROR"
+        if ($LASTEXITCODE -ne 0) {
+            Write-Log "✗ Social scraping FAILED with exit code $LASTEXITCODE" -Level "ERROR"
             Write-Log "Error output: $ScraperOutput" -Level "ERROR"
+            $script:HasErrors = $true
+            Write-Log "FATAL: Cannot proceed without social scraping data" -Level "ERROR"
+            exit 1
         }
+
+        Write-Log "✓ Social scraping completed successfully"
+        Write-Log "Output preview: $($ScraperOutput | Select-Object -First 5)"
     } catch {
-        Write-Log "✗ Social scraping exception: $_" -Level "ERROR"
+        Write-Log "✗ Social scraping FATAL exception: $_" -Level "ERROR"
+        Write-Log "Stack trace: $($_.ScriptStackTrace)" -Level "ERROR"
+        exit 1
     }
 } else {
     Write-Log "Step 1: Skipping social scraping (--SkipScraping flag)"
@@ -68,17 +69,22 @@ if (-not $SkipBriefing) {
 
     try {
         # Run content-briefing skill via Claude CLI
-        $BriefingOutput = & claude --headless -p "/content-briefing" 2>&1
+        $BriefingOutput = & claude -p "/content-briefing" 2>&1
 
-        if ($LASTEXITCODE -eq 0) {
-            Write-Log "✓ Content briefing generated successfully"
-            Write-Log "Output preview: $($BriefingOutput | Select-Object -First 5)"
-        } else {
-            Write-Log "✗ Content briefing failed with exit code $LASTEXITCODE" -Level "ERROR"
+        if ($LASTEXITCODE -ne 0) {
+            Write-Log "✗ Content briefing FAILED with exit code $LASTEXITCODE" -Level "ERROR"
             Write-Log "Error output: $BriefingOutput" -Level "ERROR"
+            $script:HasErrors = $true
+            Write-Log "FATAL: Cannot proceed without content briefing" -Level "ERROR"
+            exit 1
         }
+
+        Write-Log "✓ Content briefing generated successfully"
+        Write-Log "Output preview: $($BriefingOutput | Select-Object -First 5)"
     } catch {
-        Write-Log "✗ Content briefing exception: $_" -Level "ERROR"
+        Write-Log "✗ Content briefing FATAL exception: $_" -Level "ERROR"
+        Write-Log "Stack trace: $($_.ScriptStackTrace)" -Level "ERROR"
+        exit 1
     }
 } else {
     Write-Log "Step 2: Skipping content briefing (--SkipBriefing flag)"
@@ -96,19 +102,41 @@ $ExpectedFiles = @(
 $AllFilesExist = $true
 foreach ($File in $ExpectedFiles) {
     $FullPath = Join-Path $ProjectRoot $File
-    if (Test-Path $FullPath) {
-        $FileSize = (Get-Item $FullPath).Length
-        Write-Log "✓ Found: $File (${FileSize} bytes)"
-    } else {
-        Write-Log "✗ Missing: $File" -Level "WARN"
+
+    # Check file exists
+    if (-not (Test-Path $FullPath)) {
+        Write-Log "✗ CRITICAL: Missing expected file: $File" -Level "ERROR"
         $AllFilesExist = $false
+        $script:HasErrors = $true
+        continue
     }
+
+    # Check file is not empty
+    $FileSize = (Get-Item $FullPath).Length
+    if ($FileSize -eq 0) {
+        Write-Log "✗ CRITICAL: Empty output file: $File" -Level "ERROR"
+        $AllFilesExist = $false
+        $script:HasErrors = $true
+        continue
+    }
+
+    # Check file doesn't contain error messages
+    $Content = Get-Content $FullPath -Raw -ErrorAction SilentlyContinue
+    if ($Content -match "ERROR|Exception|Failed") {
+        Write-Log "✗ CRITICAL: Output file contains errors: $File" -Level "ERROR"
+        $AllFilesExist = $false
+        $script:HasErrors = $true
+        continue
+    }
+
+    Write-Log "✓ Found: $File (${FileSize} bytes, valid content)"
 }
 
 if ($AllFilesExist) {
-    Write-Log "✓ All expected files created"
+    Write-Log "✓ All expected files created and validated"
 } else {
-    Write-Log "⚠ Some expected files are missing" -Level "WARN"
+    Write-Log "✗ CRITICAL: Pipeline failed - files missing/invalid" -Level "ERROR"
+    exit 1
 }
 
 # Summary
@@ -121,8 +149,10 @@ if ($Test) {
 }
 
 # Exit with appropriate code
-if ($AllFilesExist) {
-    exit 0
-} else {
+if ($script:HasErrors -or -not $AllFilesExist) {
+    Write-Log "Pipeline completed with ERRORS" -Level "ERROR"
     exit 1
+} else {
+    Write-Log "Pipeline completed successfully"
+    exit 0
 }

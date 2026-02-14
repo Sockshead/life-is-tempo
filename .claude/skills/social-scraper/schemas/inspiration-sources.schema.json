@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Inspiration Sources Configuration",
+  "description": "Categorized social media accounts to monitor for content inspiration",
+  "type": "object",
+  "required": ["categories"],
+  "properties": {
+    "categories": {
+      "type": "object",
+      "description": "Content categories with associated accounts",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["accounts", "platforms"],
+        "properties": {
+          "accounts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "List of account handles to monitor"
+          },
+          "platforms": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["threads", "twitter", "instagram", "tiktok", "youtube"]
+            },
+            "minItems": 1,
+            "description": "Platforms where these accounts exist"
+          },
+          "engagement_tier": {
+            "type": "string",
+            "enum": ["high", "medium", "low"],
+            "description": "Expected engagement level of these accounts"
+          },
+          "hashtags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^#[a-zA-Z0-9_]+$"
+            },
+            "description": "Hashtags to monitor in this category"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

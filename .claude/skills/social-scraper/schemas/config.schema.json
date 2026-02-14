@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Social Scraper Configuration",
+  "description": "Configuration for social media scraping - own accounts and inspiration sources",
+  "type": "object",
+  "required": ["output"],
+  "properties": {
+    "own_accounts": {
+      "type": "object",
+      "description": "Your own social media accounts for analytics tracking",
+      "properties": {
+        "threads": {
+          "type": "string",
+          "pattern": "^@[a-zA-Z0-9._]+$",
+          "description": "Threads username (must start with @)"
+        },
+        "twitter": {
+          "type": "string",
+          "pattern": "^@[a-zA-Z0-9_]+$",
+          "description": "Twitter/X username (must start with @)"
+        },
+        "instagram": {
+          "type": "string",
+          "description": "Instagram username"
+        },
+        "tiktok": {
+          "type": "string",
+          "description": "TikTok username"
+        }
+      }
+    },
+    "inspiration_sources": {
+      "type": "object",
+      "description": "Categorized accounts to monitor for trending content",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "minItems": 1
+      }
+    },
+    "output": {
+      "type": "object",
+      "required": ["inspiration_dir", "analytics_dir"],
+      "properties": {
+        "inspiration_dir": {
+          "type": "string",
+          "description": "Directory for inspiration output files"
+        },
+        "analytics_dir": {
+          "type": "string",
+          "description": "Directory for analytics output files"
+        }
+      }
+    },
+    "scraping": {
+      "type": "object",
+      "description": "Scraping behavior configuration",
+      "properties": {
+        "default_days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30,
+          "default": 7,
+          "description": "Number of days to scrape by default"
+        },
+        "delay_between_requests_ms": {
+          "type": "integer",
+          "minimum": 1000,
+          "default": 2000,
+          "description": "Delay between requests in milliseconds (minimum 1000ms to avoid rate limiting)"
+        },
+        "max_posts_per_account": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 10,
+          "description": "Maximum posts to fetch per account"
+        },
+        "retry_attempts": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5,
+          "default": 3,
+          "description": "Number of retry attempts for failed requests"
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1000,
+          "default": 30000,
+          "description": "Request timeout in milliseconds"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

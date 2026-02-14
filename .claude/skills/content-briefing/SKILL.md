@@ -174,6 +174,7 @@ contentIdeas.sort((a, b) => {
   return scoreB - scoreA
 })
 
+// Conceptual scoring criteria - guides Claude's prioritization (not hardcoded values)
 function calculateScore(idea) {
   let score = 0
 

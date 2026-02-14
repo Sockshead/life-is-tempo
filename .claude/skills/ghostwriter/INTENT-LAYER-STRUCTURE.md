@@ -3,10 +3,10 @@
 ## Token Budget Analysis
 
 **Current load** (before Intent Layer):
-- ultra-choko.md: 179 lines (~500 tokens)
-- technical-architect.md: 264 lines (~750 tokens)
-- philosophical-muser.md: 185 lines (~550 tokens)
-- **Total first load**: ~1,800 tokens
+- ultra-choko.md: 201 lines (~560 tokens)
+- technical-architect.md: 286 lines (~800 tokens)
+- philosophical-muser.md: 207 lines (~580 tokens)
+- **Total first load**: ~1,940 tokens
 
 **Intent Layer optimized**:
 - Persona root (summary only): ~30 lines (~100 tokens each)
@@ -92,11 +92,11 @@ For each agent file:
 ## Implementation Priority
 
 1. ✅ Document Intent Layer structure (this file)
-2. ⏳ Refactor persona files (add Quick Reference at top)
-3. ⏳ Refactor agent files (reference instead of duplicate)
-4. ⏳ Validate token budgets
-5. ⏳ Test progressive disclosure in practice
+2. ✅ Refactor persona files (add Quick Reference at top)
+3. ✅ Refactor agent files (reference instead of duplicate - v2 files created)
+4. ✅ Validate token budgets (updated with actual line counts)
+5. ⏳ Test progressive disclosure in practice (requires runtime testing)
 
 ---
 
-**Note**: Current files are functional but not Intent Layer optimized. This structure should be applied before claiming Intent Layer compliance.
+**Note**: Intent Layer structure implemented as of 2026-02-14. Persona files have Quick Reference sections, v2 agent files reference personas instead of duplicating content. Token budgets updated with actual measurements. Progressive disclosure pattern ready for runtime testing.

@@ -84,7 +84,10 @@ Personas define:
 
 ### Step 1: Load Persona Configuration
 
+**Note**: Code examples below are conceptual flows showing how Claude interprets this skill. They are NOT executable code - this skill uses `disable-model-invocation: true` and works as a prompt template.
+
 ```typescript
+// Conceptual flow - not executable code
 const personaName = args.persona || 'ultra-choko'
 const personaPath = `.claude/skills/ghostwriter/personas/${personaName}.md`
 

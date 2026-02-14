@@ -10,6 +10,8 @@ disable-model-invocation: true
 
 Bi-directional social media integration: monitors curated inspiration sources AND tracks your own account performance.
 
+**Note**: This skill uses `disable-model-invocation: true`. Code examples throughout this file are conceptual flows that guide Claude's interpretation when the skill is invoked. They are not executable code.
+
 ## Dual Mode Operation
 
 ### Mode 1: Own Account Analytics
